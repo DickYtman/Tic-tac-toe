@@ -37,9 +37,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.loginUser = exports.registerUser = void 0;
+var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var express_async_handler_1 = require("express-async-handler");
 var userModel_1 = require("../models/userModel");
+var generateToken = function (id) {
+    return jsonwebtoken_1["default"].sign({ id: id }, process.env.JWT_SECRET, {
+        expiresIn: '30d'
+    });
+};
 // register new User
 // @route Post /users/register-user
 // access public
@@ -80,7 +86,8 @@ exports.registerUser = express_async_handler_1["default"](function (req, res) { 
                         _id: user.id,
                         name: user.name,
                         email: user.email,
-                        password: user.password
+                        password: user.password,
+                        token: generateToken(user._id)
                     });
                 }
                 else {
@@ -112,9 +119,11 @@ exports.loginUser = express_async_handler_1["default"](function (req, res) { ret
             case 3:
                 if (_b) {
                     res.status(201).json({
-                        _id: userExists.id,
+                        id: userExists.id,
+                        _id: userExists._id,
                         name: userExists.name,
-                        email: userExists.email
+                        email: userExists.email,
+                        token: generateToken(userExists._id)
                     });
                 }
                 else {
