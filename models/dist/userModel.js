@@ -17,4 +17,5 @@ var UserSchema = new mongoose_1["default"].Schema({
 }, {
     timestamps: true
 });
-exports["default"] = UserSchema;
+var UserModel = mongoose_1["default"].model("users", UserSchema);
+exports["default"] = UserModel;
