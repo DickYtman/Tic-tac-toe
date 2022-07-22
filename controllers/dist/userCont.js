@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.loginUser = exports.registerUser = void 0;
+exports.deleteUser = exports.updateUser = exports.loginUser = exports.registerUser = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var express_async_handler_1 = require("express-async-handler");
@@ -130,6 +130,52 @@ exports.loginUser = express_async_handler_1["default"](function (req, res) { ret
                     res.status(400);
                     throw new Error('Invalid credentials');
                 }
+                return [2 /*return*/];
+        }
+    });
+}); });
+// Update User
+// @route PUT /users/user-card/:id
+// Access Private
+exports.updateUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, updateUser;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    res.status(400);
+                    throw new Error('User not found');
+                }
+                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate(req.param.bind, req.body, {
+                        "new": true
+                    })];
+            case 2:
+                updateUser = _a.sent();
+                res.status(200).json(updateUser);
+                return [2 /*return*/];
+        }
+    });
+}); });
+// Delete User
+// @route DELETE /users/user-card/:id
+// Access Private
+exports.deleteUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    res.status(400);
+                    throw new Error('User not found');
+                }
+                return [4 /*yield*/, user.remove()];
+            case 2:
+                _a.sent();
+                res.status(200).json({ id: req.params.id });
                 return [2 /*return*/];
         }
     });

@@ -76,3 +76,41 @@ export const loginUser = asyncHandler(async(req, res) => {
         throw new Error('Invalid credentials')
     }
 })
+
+
+// Update User
+// @route PUT /users/user-card/:id
+// Access Private
+
+export const updateUser = asyncHandler(async(req, res) => {
+    const user = await UserModel.findById(req.params.id)
+
+    if(!user) {
+        res.status(400)
+        throw new Error('User not found')
+    } 
+
+    const updateUser = await UserModel.findByIdAndUpdate(req.param.bind, req.body, {
+            new: true
+        })
+    
+    res.status(200).json(updateUser)
+})
+
+
+// Delete User
+// @route DELETE /users/user-card/:id
+// Access Private
+
+export const deleteUser = asyncHandler(async (req, res) => {
+    const user = await UserModel.findById(req.params.id)
+
+    if(!user) {
+        res.status(400)
+        throw new Error('User not found')
+    } 
+
+    await user.remove()
+
+    res.status(200).json( {id: req.params.id} )
+})
