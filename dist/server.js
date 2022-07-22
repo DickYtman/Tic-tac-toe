@@ -13,4 +13,6 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const userRoute_1 = __importDefault(require("./routes/userRoute"));
+app.use('/users', userRoute_1.default);
 app.listen(PORT, () => (console.info(`Server listening on port: ${PORT}`)));

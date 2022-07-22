@@ -11,6 +11,8 @@ app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 
+import userRoute from "./routes/userRoute"
+app.use('/users', userRoute)
 
 app.listen(PORT, () => (
     console.info(`Server listening on port: ${PORT}`)
