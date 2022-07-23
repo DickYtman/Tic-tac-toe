@@ -5,8 +5,8 @@ import { registerUser, loginUser, updateUser, deleteUser} from '../controllers/u
 router
     .post('/register-user', registerUser)
     .post('/login-user', loginUser)
-    .patch('/user-card', updateUser)
-    .delete('/user-card', deleteUser)
+    .patch('/user-card/:id', updateUser)
+    .delete('/user-card/:id', deleteUser)
 
 
 export default router

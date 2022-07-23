@@ -148,7 +148,7 @@ exports.updateUser = express_async_handler_1["default"](function (req, res) { re
                     res.status(400);
                     throw new Error('User not found');
                 }
-                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate(req.param.bind, req.body, {
+                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate(req.params.id, req.body, {
                         "new": true
                     })];
             case 2:
@@ -165,9 +165,12 @@ exports.deleteUser = express_async_handler_1["default"](function (req, res) { re
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
+            case 0:
+                console.log('hello');
+                return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
             case 1:
                 user = _a.sent();
+                console.log(user);
                 if (!user) {
                     res.status(400);
                     throw new Error('User not found');

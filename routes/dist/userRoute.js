@@ -6,5 +6,5 @@ var userCont_1 = require("../controllers/userCont");
 router
     .post('/register-user', userCont_1.registerUser)
     .post('/login-user', userCont_1.loginUser)
-    .patch('/user-card', userCont_1.updateUser)["delete"]('/user-card', userCont_1.deleteUser);
+    .patch('/user-card/:id', userCont_1.updateUser)["delete"]('/user-card/:id', userCont_1.deleteUser);
 exports["default"] = router;

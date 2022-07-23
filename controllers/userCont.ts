@@ -90,7 +90,7 @@ export const updateUser = asyncHandler(async(req, res) => {
         throw new Error('User not found')
     } 
 
-    const updateUser = await UserModel.findByIdAndUpdate(req.param.bind, req.body, {
+    const updateUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
     
@@ -103,8 +103,9 @@ export const updateUser = asyncHandler(async(req, res) => {
 // Access Private
 
 export const deleteUser = asyncHandler(async (req, res) => {
+    console.log('hello');
     const user = await UserModel.findById(req.params.id)
-
+    console.log(user);
     if(!user) {
         res.status(400)
         throw new Error('User not found')
