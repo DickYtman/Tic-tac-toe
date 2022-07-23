@@ -53,7 +53,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 5, , 6]);
+                _b.trys.push([0, 7, , 8]);
                 _a = req.body, firstName = _a.firstName, email = _a.email, password = _a.password;
                 if (!firstName && !email && !password) {
                     res.status(400);
@@ -62,46 +62,33 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
                 return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
             case 1:
                 userExists = _b.sent();
-                if (userExists) {
-                    userError = (email + " already exists");
-                    res.send(userError);
-                    res.status(400);
-                    throw new Error(email + " already exists");
-                }
-                return [4 /*yield*/, bcryptjs_1["default"].genSalt(10)];
-            case 2:
+                if (!userExists) return [3 /*break*/, 2];
+                userError = (email + " already exists");
+                res.send(userError);
+                res.status(400);
+                throw new Error(email + " already exists");
+            case 2: return [4 /*yield*/, bcryptjs_1["default"].genSalt(10)];
+            case 3:
                 salt = _b.sent();
                 return [4 /*yield*/, bcryptjs_1["default"].hash(password, salt)
                     //Create user
                 ];
-            case 3:
+            case 4:
                 hashedPassword = _b.sent();
                 return [4 /*yield*/, userModel_1["default"].create({
                         firstName: firstName,
                         email: email,
                         password: hashedPassword
                     })];
-            case 4:
-                user = _b.sent();
-                if (user) {
-                    res.status(201).json({
-                        _id: user.id,
-                        firstName: user.firstName,
-                        email: user.email,
-                        password: user.password,
-                        token: generateToken(user._id)
-                    });
-                }
-                else {
-                    res.status(400);
-                    throw new Error('Invalid user data');
-                }
-                return [3 /*break*/, 6];
             case 5:
+                user = _b.sent();
+                _b.label = 6;
+            case 6: return [3 /*break*/, 8];
+            case 7:
                 error_1 = _b.sent();
                 console.error(error_1);
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 8];
+            case 8: return [2 /*return*/];
         }
     });
 }); };

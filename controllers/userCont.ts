@@ -30,7 +30,7 @@ export const registerUser = async(req, res) => {
         )
         res.status(400)
         throw new Error(`${email} already exists`)
-    }
+    } else {
 
     // Hash password
     const salt = await bcrypt.genSalt(10)
@@ -42,19 +42,20 @@ export const registerUser = async(req, res) => {
         email,
         password:hashedPassword
     })
+}
 
-    if(user) {
-        res.status(201).json({
-            _id: user.id,
-            firstName: user.firstName,
-            email: user.email,
-            password: user.password,
-            token: generateToken(user._id),
-        })
-    } else {
-        res.status(400)
-        throw new Error('Invalid user data')
-    }
+    // if(user) {
+    //     res.status(201).json({
+    //         _id: user.id,
+    //         firstName: user.firstName,
+    //         email: user.email,
+    //         password: user.password,
+    //         token: generateToken(user._id),
+    //     })
+    // } else {
+    //     res.status(400)
+    //     throw new Error('Invalid user data')
+    // }
     } catch(error) {
         console.error(error);
     }
