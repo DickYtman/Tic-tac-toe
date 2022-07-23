@@ -39,7 +39,6 @@ exports.__esModule = true;
 exports.deleteUser = exports.updateUser = exports.loginUser = exports.registerUser = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
-var express_async_handler_1 = require("express-async-handler");
 var userModel_1 = require("../models/userModel");
 var generateToken = function (id) {
     return jsonwebtoken_1["default"].sign({ id: id }, process.env.JWT_SECRET, {
@@ -49,13 +48,14 @@ var generateToken = function (id) {
 // register new User
 // @route Post /users/register-user
 // access public
-exports.registerUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, email, password, userExists, salt, hashedPassword, user;
+exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, firstName, email, password, userExists, userError, salt, hashedPassword, user, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, name = _a.name, email = _a.email, password = _a.password;
-                if (!name && !email && !password) {
+                _b.trys.push([0, 5, , 6]);
+                _a = req.body, firstName = _a.firstName, email = _a.email, password = _a.password;
+                if (!firstName && !email && !password) {
                     res.status(400);
                     throw new Error('Please fill all the fields');
                 }
@@ -63,6 +63,8 @@ exports.registerUser = express_async_handler_1["default"](function (req, res) { 
             case 1:
                 userExists = _b.sent();
                 if (userExists) {
+                    userError = (email + " already exists");
+                    res.send(userError);
                     res.status(400);
                     throw new Error(email + " already exists");
                 }
@@ -75,7 +77,7 @@ exports.registerUser = express_async_handler_1["default"](function (req, res) { 
             case 3:
                 hashedPassword = _b.sent();
                 return [4 /*yield*/, userModel_1["default"].create({
-                        name: name,
+                        firstName: firstName,
                         email: email,
                         password: hashedPassword
                     })];
@@ -84,7 +86,7 @@ exports.registerUser = express_async_handler_1["default"](function (req, res) { 
                 if (user) {
                     res.status(201).json({
                         _id: user.id,
-                        name: user.name,
+                        firstName: user.firstName,
                         email: user.email,
                         password: user.password,
                         token: generateToken(user._id)
@@ -94,18 +96,24 @@ exports.registerUser = express_async_handler_1["default"](function (req, res) { 
                     res.status(400);
                     throw new Error('Invalid user data');
                 }
-                return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 5:
+                error_1 = _b.sent();
+                console.error(error_1);
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
-}); });
+}); };
 // login  User
 // @route Post /users/login-user
 // access public
-exports.loginUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, userExists, _b;
+exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, email, password, userExists, _b, error_2;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
+                _c.trys.push([0, 4, , 5]);
                 _a = req.body, email = _a.email, password = _a.password;
                 return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
             case 1:
@@ -121,7 +129,7 @@ exports.loginUser = express_async_handler_1["default"](function (req, res) { ret
                     res.status(201).json({
                         id: userExists.id,
                         _id: userExists._id,
-                        name: userExists.name,
+                        firstName: userExists.firstName,
                         email: userExists.email,
                         token: generateToken(userExists._id)
                     });
@@ -130,14 +138,19 @@ exports.loginUser = express_async_handler_1["default"](function (req, res) { ret
                     res.status(400);
                     throw new Error('Invalid credentials');
                 }
-                return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 4:
+                error_2 = _c.sent();
+                console.error(error_2);
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
-}); });
+}); };
 // Update User
 // @route PUT /users/user-card/:id
 // Access Private
-exports.updateUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, updateUser;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -157,11 +170,11 @@ exports.updateUser = express_async_handler_1["default"](function (req, res) { re
                 return [2 /*return*/];
         }
     });
-}); });
+}); };
 // Delete User
 // @route DELETE /users/user-card/:id
 // Access Private
-exports.deleteUser = express_async_handler_1["default"](function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -182,4 +195,4 @@ exports.deleteUser = express_async_handler_1["default"](function (req, res) { re
                 return [2 /*return*/];
         }
     });
-}); });
+}); };

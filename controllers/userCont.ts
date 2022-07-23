@@ -13,16 +13,21 @@ const generateToken = (id) => {
 // @route Post /users/register-user
 // access public
 
-export const registerUser = asyncHandler(async(req, res) => {
-    const { name, email, password } = req.body
+export const registerUser = async(req, res) => {
+    try {
+    const { firstName, email, password } = req.body
 
-    if(!name && !email && !password) {
+    if(!firstName && !email && !password) {
         res.status(400)
         throw new Error('Please fill all the fields')
     }
 
     const userExists = await UserModel.findOne( {email} )
     if(userExists) {
+        const userError = (`${email} already exists`) 
+        res.send(
+            userError
+        )
         res.status(400)
         throw new Error(`${email} already exists`)
     }
@@ -33,7 +38,7 @@ export const registerUser = asyncHandler(async(req, res) => {
 
     //Create user
     const user = await UserModel.create({
-        name,
+        firstName,
         email,
         password:hashedPassword
     })
@@ -41,7 +46,7 @@ export const registerUser = asyncHandler(async(req, res) => {
     if(user) {
         res.status(201).json({
             _id: user.id,
-            name: user.name,
+            firstName: user.firstName,
             email: user.email,
             password: user.password,
             token: generateToken(user._id),
@@ -50,14 +55,18 @@ export const registerUser = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('Invalid user data')
     }
-})
+    } catch(error) {
+        console.error(error);
+    }
+}
 
 
 // login  User
 // @route Post /users/login-user
 // access public
 
-export const loginUser = asyncHandler(async(req, res) => {
+export const loginUser = async(req, res) => {
+    try {
     const { email, password } = req.body
 
     // check for user email
@@ -67,7 +76,7 @@ export const loginUser = asyncHandler(async(req, res) => {
         res.status(201).json({
             id: userExists.id,
             _id: userExists._id,
-            name: userExists.name,
+            firstName: userExists.firstName,
             email: userExists.email,
             token: generateToken(userExists._id),
         })
@@ -75,14 +84,17 @@ export const loginUser = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('Invalid credentials')
     }
-})
+    } catch(error) {
+        console.error(error)
+    }
+}
 
 
 // Update User
 // @route PUT /users/user-card/:id
 // Access Private
 
-export const updateUser = asyncHandler(async(req, res) => {
+export const updateUser = async(req, res) => {
     const user = await UserModel.findById(req.params.id)
 
     if(!user) {
@@ -95,14 +107,14 @@ export const updateUser = asyncHandler(async(req, res) => {
         })
     
     res.status(200).json(updateUser)
-})
+}
 
 
 // Delete User
 // @route DELETE /users/user-card/:id
 // Access Private
 
-export const deleteUser = asyncHandler(async (req, res) => {
+export const deleteUser = async (req, res) => {
     console.log('hello');
     const user = await UserModel.findById(req.params.id)
     console.log(user);
@@ -114,4 +126,4 @@ export const deleteUser = asyncHandler(async (req, res) => {
     await user.remove()
 
     res.status(200).json( {id: req.params.id} )
-})
+}

@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.js"
+    integrity="sha512-rozBdNtS7jw9BlC76YF1FQGjz17qQ0J/Vu9ZCFIW374sEy4EZRbRcUZa2RU/MZ90X2mnLU56F75VfdToGV0RiA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>hello</h1>
+    <form name="registerForm" id="submitRegistration">
+        <h1>Registration:</h1>
+        <div class="erroUser" id="errorUser" style="color:red;font-style: italic;"></div>
+        <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
+        <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
+        <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="false">
+        <input type="submit"  value="SEND">
+    </form>
+    <form name="loginForm" id="submitLogin">
+        <h1>Login:</h1>
+        <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
+        <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
+        <input type="submit"  value="SEND">
+    </form>
+
+
+    <script src="./dist/index.js"></script>
 </body>
 </html>
