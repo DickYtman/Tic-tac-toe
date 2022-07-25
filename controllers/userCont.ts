@@ -9,6 +9,24 @@ const generateToken = (id) => {
     })
 }
 
+interface User {
+    _id,
+    firstName: {
+        value: string,
+        type: string,
+        name: string
+    },
+    email: {
+        value: string,
+        type: string,
+        name: string
+    },
+    password: {
+        value: number,
+        type: string,
+        name: string
+    }
+}
 // register new User
 // @route Post /users/register-user
 // access public
@@ -24,9 +42,9 @@ export const registerUser = async(req, res) => {
 
     const userExists = await UserModel.findOne( {email} )
     if(userExists) {
-        const userError = (`${email} already exists`) 
+        const userError = (`${email} already exists`)   
         res.send(
-            userError
+            { userError }
         )
         res.status(400)
         throw new Error(`${email} already exists`)
@@ -42,8 +60,7 @@ export const registerUser = async(req, res) => {
         email,
         password:hashedPassword
     })
-}
-
+    res.send( {user} )
     // if(user) {
     //     res.status(201).json({
     //         _id: user.id,
@@ -56,6 +73,7 @@ export const registerUser = async(req, res) => {
     //     res.status(400)
     //     throw new Error('Invalid user data')
     // }
+}
     } catch(error) {
         console.error(error);
     }
@@ -72,15 +90,15 @@ export const loginUser = async(req, res) => {
 
     // check for user email
     const userExists = await UserModel.findOne( {email} )
-    
     if(userExists && (await bcrypt.compare(password, userExists.password))) {
-        res.status(201).json({
-            id: userExists.id,
-            _id: userExists._id,
-            firstName: userExists.firstName,
-            email: userExists.email,
-            token: generateToken(userExists._id),
-        })
+        // res.status(201).json({
+        //     id: userExists.id,
+        //     _id: userExists._id,
+        //     firstName: userExists.firstName,
+        //     email: userExists.email,
+        //     token: generateToken(userExists._id),
+        // })
+        res.send( {userExists} )
     } else {
         res.status(400)
         throw new Error('Invalid credentials')
@@ -127,4 +145,15 @@ export const deleteUser = async (req, res) => {
     await user.remove()
 
     res.status(200).json( {id: req.params.id} )
+}
+
+
+export const getUser = async(req, res) => {
+    try{
+    const { userId } = req.body
+    const user = await UserModel.findById(userId)
+    res.send( {user} )
+    } catch(error) {
+        console.log(error)
+    }
 }

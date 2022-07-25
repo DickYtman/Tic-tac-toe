@@ -36,8 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var submitRegistration = document.querySelector('#submitRegistration');
+var submitLogin = document.querySelector('#submitLogin');
 var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, firstName, email, password, data, userError, error_1;
+    var _a, firstName, email, password, data, userError, user, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -50,9 +51,13 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userError = data;
+                userError = data.userError, user = data.user;
                 if (userError) {
                     document.querySelector('#errorUser').innerHTML = userError;
+                }
+                console.log(userError);
+                if (user) {
+                    window.location.href = "./game.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
@@ -64,7 +69,7 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
     });
 }); };
 var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, email, password, data, error_2;
+    var _a, email, password, data, userExists, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -76,6 +81,10 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
                     })];
             case 1:
                 data = (_b.sent()).data;
+                userExists = data.userExists;
+                if (userExists) {
+                    window.location.href = "./game.html?userId=" + userExists._id;
+                }
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _b.sent();
@@ -107,3 +116,4 @@ var inputScraper = function (event) {
     return inputObject;
 };
 submitRegistration.addEventListener('submit', handleRegistration);
+submitLogin.addEventListener('submit', handleLogin);

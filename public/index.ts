@@ -1,7 +1,8 @@
 const submitRegistration = document.querySelector('#submitRegistration')
-
+const submitLogin = document.querySelector('#submitLogin')
 
 interface userRegister {
+    _id,
     firstName: {
         value: string,
         type: string,
@@ -33,9 +34,14 @@ interface userRegister {
         password
     })
 
-    const userError = data
+    const { userError, user } = data
+    
     if (userError) {
         document.querySelector('#errorUser').innerHTML = userError
+    }
+console.log(userError);
+    if(user) {
+        window.location.href= `./game.html?userId=${user._id}`
     }
 
     } catch (error) {
@@ -54,10 +60,16 @@ const handleLogin = async(ev) => {
             email,
             password
         })
+
+        const { userExists } = data
+        if (userExists) {
+            window.location.href= `./game.html?userId=${userExists._id}`
+        }
     } catch (error) {
         console.log(error);
     }
 }
+
 
 const inputScraper = (event) => {
     event.preventDefault()
@@ -82,4 +94,7 @@ const inputScraper = (event) => {
 
 }
 
+
+
 submitRegistration.addEventListener('submit', handleRegistration)
+submitLogin.addEventListener('submit', handleLogin)

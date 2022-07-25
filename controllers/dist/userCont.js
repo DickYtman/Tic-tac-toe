@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.deleteUser = exports.updateUser = exports.loginUser = exports.registerUser = void 0;
+exports.getUser = exports.deleteUser = exports.updateUser = exports.loginUser = exports.registerUser = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var userModel_1 = require("../models/userModel");
@@ -64,7 +64,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
                 userExists = _b.sent();
                 if (!userExists) return [3 /*break*/, 2];
                 userError = (email + " already exists");
-                res.send(userError);
+                res.send({ userError: userError });
                 res.status(400);
                 throw new Error(email + " already exists");
             case 2: return [4 /*yield*/, bcryptjs_1["default"].genSalt(10)];
@@ -82,6 +82,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
                     })];
             case 5:
                 user = _b.sent();
+                res.send({ user: user });
                 _b.label = 6;
             case 6: return [3 /*break*/, 8];
             case 7:
@@ -113,13 +114,14 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
                 _c.label = 3;
             case 3:
                 if (_b) {
-                    res.status(201).json({
-                        id: userExists.id,
-                        _id: userExists._id,
-                        firstName: userExists.firstName,
-                        email: userExists.email,
-                        token: generateToken(userExists._id)
-                    });
+                    // res.status(201).json({
+                    //     id: userExists.id,
+                    //     _id: userExists._id,
+                    //     firstName: userExists.firstName,
+                    //     email: userExists.email,
+                    //     token: generateToken(userExists._id),
+                    // })
+                    res.send({ userExists: userExists });
                 }
                 else {
                     res.status(400);
@@ -180,6 +182,26 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
                 _a.sent();
                 res.status(200).json({ id: req.params.id });
                 return [2 /*return*/];
+        }
+    });
+}); };
+exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userId, user, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                userId = req.body.userId;
+                return [4 /*yield*/, userModel_1["default"].findById(userId)];
+            case 1:
+                user = _a.sent();
+                res.send({ user: user });
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                console.log(error_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
