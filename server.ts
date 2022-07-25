@@ -2,11 +2,12 @@ const express = require('express')
 const colors = require('colors')
 const dotenv = require('dotenv').config()
 import connectDB from "./config/db"
+import cookieParser from 'cookie-parser'
 const PORT = process.env.PORT || 5000
 
 connectDB()
 const app = express()
-
+app.use(cookieParser())
 app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))

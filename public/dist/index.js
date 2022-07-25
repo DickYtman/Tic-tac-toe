@@ -37,6 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var submitRegistration = document.querySelector('#submitRegistration');
 var submitLogin = document.querySelector('#submitLogin');
+var handleLoadCookie = function (ev) {
+    getUserByCookie();
+};
 var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0, function () {
     var _a, firstName, email, password, data, userError, user, error_1;
     return __generator(this, function (_b) {
@@ -89,6 +92,28 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
             case 2:
                 error_2 = _b.sent();
                 console.log(error_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var getUserByCookie = function () { return __awaiter(_this, void 0, void 0, function () {
+    var data, userDB, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios.get('/users/get-user')];
+            case 1:
+                data = (_a.sent()).data;
+                userDB = data.userDB;
+                if (userDB) {
+                    window.location.href = "./game.html?userId=" + userDB._id;
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                console.log(error_3);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

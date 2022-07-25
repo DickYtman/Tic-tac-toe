@@ -1,6 +1,10 @@
 const submitRegistration = document.querySelector('#submitRegistration')
 const submitLogin = document.querySelector('#submitLogin')
 
+const handleLoadCookie = (ev) => {
+    getUserByCookie()
+}
+
 interface userRegister {
     _id,
     firstName: {
@@ -69,6 +73,24 @@ const handleLogin = async(ev) => {
         console.log(error);
     }
 }
+
+
+const getUserByCookie = async() => {
+    try {
+
+
+        const { data } = await axios.get('/users/get-user')
+
+        const { userDB } = data
+        if (userDB) {
+            window.location.href= `./game.html?userId=${userDB._id}`
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 
 
 const inputScraper = (event) => {

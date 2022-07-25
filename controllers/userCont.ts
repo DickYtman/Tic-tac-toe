@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs'
 import asyncHandler from 'express-async-handler'
 import UserModel from '../models/userModel'
 
+
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
@@ -91,13 +93,7 @@ export const loginUser = async(req, res) => {
     // check for user email
     const userExists = await UserModel.findOne( {email} )
     if(userExists && (await bcrypt.compare(password, userExists.password))) {
-        // res.status(201).json({
-        //     id: userExists.id,
-        //     _id: userExists._id,
-        //     firstName: userExists.firstName,
-        //     email: userExists.email,
-        //     token: generateToken(userExists._id),
-        // })
+        res.cookie('userExists', userExists._id)
         res.send( {userExists} )
     } else {
         res.status(400)
@@ -105,6 +101,28 @@ export const loginUser = async(req, res) => {
     }
     } catch(error) {
         console.error(error)
+    }
+}
+
+
+// Get user by cookie
+
+export const getUserByCookie = async(req, res) => {
+    try {
+        const { userExists } = req.cookies
+        console.log(userExists);
+        if(!userExists) {
+            throw new Error('User not found')
+        }
+
+        const userDB = await UserModel.findById( userExists )
+        if(!userDB) {
+            throw new Error('userDB not found' )
+        }
+        res.send({ ok:true, userDB })
+    } catch (error) {
+        console.log(error);
+        res.send( {error} )
     }
 }
 

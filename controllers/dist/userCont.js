@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getUser = exports.deleteUser = exports.updateUser = exports.loginUser = exports.registerUser = void 0;
+exports.getUser = exports.deleteUser = exports.updateUser = exports.getUserByCookie = exports.loginUser = exports.registerUser = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var userModel_1 = require("../models/userModel");
@@ -114,13 +114,7 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
                 _c.label = 3;
             case 3:
                 if (_b) {
-                    // res.status(201).json({
-                    //     id: userExists.id,
-                    //     _id: userExists._id,
-                    //     firstName: userExists.firstName,
-                    //     email: userExists.email,
-                    //     token: generateToken(userExists._id),
-                    // })
+                    res.cookie('userExists', userExists._id);
                     res.send({ userExists: userExists });
                 }
                 else {
@@ -133,6 +127,35 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
                 console.error(error_2);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
+        }
+    });
+}); };
+// Get user by cookie
+exports.getUserByCookie = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userExists, userDB, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                userExists = req.cookies.userExists;
+                console.log(userExists);
+                if (!userExists) {
+                    throw new Error('User not found');
+                }
+                return [4 /*yield*/, userModel_1["default"].findById(userExists)];
+            case 1:
+                userDB = _a.sent();
+                if (!userDB) {
+                    throw new Error('userDB not found');
+                }
+                res.send({ ok: true, userDB: userDB });
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                console.log(error_3);
+                res.send({ error: error_3 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
@@ -186,7 +209,7 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
     });
 }); };
 exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userId, user, error_3;
+    var userId, user, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -198,8 +221,8 @@ exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 res.send({ user: user });
                 return [3 /*break*/, 3];
             case 2:
-                error_3 = _a.sent();
-                console.log(error_3);
+                error_4 = _a.sent();
+                console.log(error_4);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
