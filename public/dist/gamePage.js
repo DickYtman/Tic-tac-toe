@@ -61,7 +61,7 @@ var handleGetUser = function () { return __awaiter(_this, void 0, void 0, functi
             case 1:
                 data = (_a.sent()).data;
                 user = data.user;
-                root.innerHTML = "Hello " + user.firstName;
+                root.innerHTML = "Hello " + user.firstName + "!";
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
