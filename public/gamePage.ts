@@ -20,7 +20,7 @@ const handleGetUser = async() => {
                userId
           })
           const { user } = data
-          root.innerHTML = `Hello ${user.firstName}`
+          root.innerHTML = `Hello ${user.firstName}!`
      } catch (error) {
           console.log(error);
      } 
