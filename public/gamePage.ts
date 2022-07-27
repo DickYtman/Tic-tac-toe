@@ -29,3 +29,11 @@ const handleGetUser = async() => {
   const handleLoad = () => {
      handleGetUser()
   }
+  const cells = document.querySelectorAll("")
+
+  const restartBtn =document.querySelector("")
+  const winConditions ={
+     [0, 1, 2],
+     
+
+  }

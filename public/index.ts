@@ -24,40 +24,40 @@ interface userRegister {
     }
 }
 
- const handleRegistration = async(ev) => {
+const handleRegistration = async (ev) => {
     try {
         const {
             firstName: { value: firstName },
             email: { value: email },
             password: { value: password },
-        } = inputScraper(ev) 
-        
-    const { data } = await axios.post('/users/user-register', {
-        firstName,
-        email,
-        password
-    })
+        } = inputScraper(ev)
 
-    const { userError, user } = data
-    
-    if (userError) {
-        document.querySelector('#errorUser').innerHTML = userError
-    }
-console.log(userError);
-    if(user) {
-        window.location.href= `./game.html?userId=${user._id}`
-    }
+        const { data } = await axios.post('/users/user-register', {
+            firstName,
+            email,
+            password
+        })
+
+        const { userError, user } = data
+
+        if (userError) {
+            document.querySelector('#errorUser').innerHTML = userError
+        }
+        console.log(userError);
+        if (user) {
+            window.location.href = `./game.html?userId=${user._id}`
+        }
 
     } catch (error) {
         console.log(error)
     }
 }
 
-const handleLogin = async(ev) => {
+const handleLogin = async (ev) => {
     try {
         const {
             email: { value: email },
-            password: { value:password }
+            password: { value: password }
         } = inputScraper(ev)
 
         const { data } = await axios.post('/users/user-login', {
@@ -67,7 +67,7 @@ const handleLogin = async(ev) => {
 
         const { userExists } = data
         if (userExists) {
-            window.location.href= `./game.html?userId=${userExists._id}`
+            window.location.href = `./game.html?userId=${userExists._id}`
         }
     } catch (error) {
         console.log(error);
@@ -75,7 +75,7 @@ const handleLogin = async(ev) => {
 }
 
 
-const getUserByCookie = async() => {
+const getUserByCookie = async () => {
     try {
 
 
@@ -83,7 +83,7 @@ const getUserByCookie = async() => {
 
         const { userDB } = data
         if (userDB) {
-            window.location.href= `./game.html?userId=${userDB._id}`
+            window.location.href = `./game.html?userId=${userDB._id}`
         }
     } catch (error) {
         console.log(error);
@@ -96,19 +96,21 @@ const getUserByCookie = async() => {
 const inputScraper = (event) => {
     event.preventDefault()
     let inputObject = {}
-    const element = event.target 
+    const element = event.target
 
-    for( let i = 0; i < element.length; i++ ) {
+    for (let i = 0; i < element.length; i++) {
         if (element[i].name && element[i].value) {
-            inputObject[element[i].name] = {    value: element[i].value,
-                                                name: element[i].name,
-                                                type: element[i].type   }
+            inputObject[element[i].name] = {
+                value: element[i].value,
+                name: element[i].name,
+                type: element[i].type
+            }
         } else {
             inputObject[element[i].name] = {
-                                                value: '',
-                                                name: element[i].name,
-                                                type: element[i].type
-                                                                        }
+                value: '',
+                name: element[i].name,
+                type: element[i].type
+            }
         }
     }
     event.target.reset();

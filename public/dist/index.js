@@ -125,9 +125,11 @@ var inputScraper = function (event) {
     var element = event.target;
     for (var i = 0; i < element.length; i++) {
         if (element[i].name && element[i].value) {
-            inputObject[element[i].name] = { value: element[i].value,
+            inputObject[element[i].name] = {
+                value: element[i].value,
                 name: element[i].name,
-                type: element[i].type };
+                type: element[i].type
+            };
         }
         else {
             inputObject[element[i].name] = {
