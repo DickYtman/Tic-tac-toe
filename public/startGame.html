@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./dist/startGame.css">
 
 <body>
-    <div class="startingGame">
+    <div class="startingGame ">
         <h1 class="selectPlayer">Select your Player </h1>
         <div class="profile">
             <div class="imgPlayer">
@@ -18,7 +18,7 @@
                 <img src="./img/oImage.png" class="idImg" data-id="oImg" alt="">
             </div>
         </div>
-        <button class="startBtn" id="startBtnId">Let's Start</button>
+        <button class="primaryBtn" id="startBtnId">Let's Start</button>
     </div>
     <!--game board-->
     <div class="container">
@@ -34,12 +34,24 @@
             <div class="block" id="8" data-cell></div>
             <div class="block" id="9" data-cell></div>
 <!-- >>>>>>> 1c4df4e167d2241fe7a6974559ff213da50d6826 -->
-
         </div>
-        <h2 id="statusText"></h2>
-        <button id="restartBtn">Restart</button>
-
     </div>
+        <!--Draw,No winners window-->
+        <div class="draw show">
+            <div class="restartText">
+        <h1 class="text-center" id="statusText">Try Again</h1>
+    </div>
+        <button id="restartBtn" class="primaryBtn">Restart</button>
+    </div>
+      <!--winner window-->
+      <div class="winnerWindow show">
+        <h1 class="text-center">Winner</h1>
+        <div class="winner"></div>
+        <button class="primaryBtn" id="playAgainBtn">Play Again</button>
+      </div>
+
+
+  
 </body>
 
 </html>

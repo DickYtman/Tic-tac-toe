@@ -1,4 +1,4 @@
-.startingGame, .container {
+.container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.startBtn {
+.primaryBtn {
   border: none;
   background: blue;
   padding: 10px 20px;
@@ -17,9 +17,15 @@
   cursor: pointer;
 }
 
-.startBtn:hover {
+.primaryBtn:hover {
   background: green;
   color: black;
+}
+
+.text-center {
+  text-align: center;
+  color: red;
+  font-weight: bold;
 }
 
 .idImg {
@@ -48,15 +54,8 @@
   cursor: pointer;
 }
 
-.block.xImg .block.oImg {
+.block.xImg, .block.oImg {
   cursor: not-allowed;
-}
-
-.board.xImg .block :hover {
-  background: url("../img/xImage.png") yellow no-repeat;
-  background-size: 100px 100px;
-  background-position: center;
-  opacity: 0.5;
 }
 
 .block.xImg {
@@ -67,4 +66,31 @@
 .block.oImg {
   background: url("../img/oImage.png") no-repeat;
   background-size: 100px 100px;
+}
+
+.board.x .block:not(.block.xImg):not(.block.oImg):hover {
+  background: url("../img/xImage.png") no-repeat;
+  background-size: 100px 100px;
+  background-position: center;
+  opacity: 0.5;
+}
+
+.startingGame, .winnerWindow, .draw {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.draw, .winnerWindow {
+  display: none;
+}
+
+.draw.show, .winnerWindow.show {
+  display: flex;
 }
