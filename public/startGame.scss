@@ -1,0 +1,76 @@
+body{
+    // background-color: rgba(0, 0, 0, 0.707);
+}
+
+.startingGame,.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.startBtn{
+    border: none;
+    background: blue;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    margin-top: 2em;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.startBtn:hover{
+    background: green;
+    color:black ;
+}
+
+// .startingGame.profile.imgPlayer>img{
+//     cursor: pointer;
+// }
+// .startingGame.profile.imgPlayer>img:hover{
+// background-color: yellow;
+// }
+
+.idImg{
+    height: 120px;
+
+}
+
+.startingGame.hide{
+    display: none;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    background-color: grey;
+    row-gap: 3px;
+    column-gap: 3px;
+}
+
+.block{
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.board.x.o.block:hover{
+    background: url('./img/female1.png') yellow no-repeat;
+    opacity: 0.5;
+}
+
+.block.x{
+    background: url('./img/female1.png') no-repeat;
+    background-position: center;
+}
+
+.block.o{
+    background: url("./img/female1.png") no-repeat;
+    background-position: center;
+}
