@@ -61,11 +61,18 @@ body{
 }
 
 .board.x .block:hover{
-    background: url('./img/xImage.png') yellow no-repeat;
+    background: url('../img/xImage.png') no-repeat;
+    background-size: 100px 100px;
+    background-position: center;
     opacity: 0.5;
 }
 
 .block.x{
-    background:url('./img/xImage.png') no-repeat;
-    background-size: cover;
+    background: url('../img/xImage.png') no-repeat;
+    background-size: 100px 100px;
+}
+
+.block.o{
+    background: url('../img/oImage.png') no-repeat;
+    background-size: 100px 100px;
 }
