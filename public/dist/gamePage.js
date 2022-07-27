@@ -34,7 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a;
 var _this = this;
 var root = document.querySelector('#root');
 var getUserId = function () {
@@ -75,8 +74,35 @@ var handleGetUser = function () { return __awaiter(_this, void 0, void 0, functi
 var handleLoad = function () {
     handleGetUser();
 };
-var cells = document.querySelectorAll("");
-var restartBtn = document.querySelector("");
-var winConditions = (_a = {},
-    _a[0, 1, 2] = ,
-    _a);
+var cells = document.querySelectorAll(".block");
+var statusText = document.querySelector("#statusText");
+var restartBtn = document.querySelector("#restartBtn");
+var winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8,],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6,]
+];
+var options = ["", "", "", "", "", "", "", "", ""];
+var currentPlayer = "X";
+var running = false;
+gameStarter();
+//function that initialize the game
+function gameStarter() {
+    cells.forEach(function (block) { return block.addEventListener("click", cellClicked); });
+    restartBtn.addEventListener("click", restartGame);
+}
+function cellClicked() {
+}
+function updateCell() {
+}
+function changePlayer() {
+}
+function checkWinner() {
+}
+function restartGame() {
+}

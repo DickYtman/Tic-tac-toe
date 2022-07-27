@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>TicTacToe</title>
 </head>
 <link rel="stylesheet" href="./dist/startGame.css">
+
 <body>
     <div class="startingGame">
         <h1 class="selectPlayer">Select your Player </h1>
@@ -16,22 +18,26 @@
                 <img src="./img/oImage.png" class="idImg" data-id="oImg" alt="">
             </div>
         </div>
-        <button class="startBtn" id="startBtnId" >Let's Start</button>
+        <button class="startBtn" id="startBtnId">Let's Start</button>
     </div>
     <!--game board-->
     <div class="container">
-    <div class="board x" id="board">
-        <div class="block x" data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-        <div class="block"data-cell></div>
-    
+        <div class="board x" id="board">
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+
+        </div>
+        <h2 id="statusText"></h2>
+        <button id="restartBtn">Restart</button>
+
     </div>
-</div>
 </body>
+
 </html>
