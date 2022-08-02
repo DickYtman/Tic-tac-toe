@@ -79,7 +79,7 @@
     background-size: 100px 100px;
 }
 
-.board.x .block:not(.block.xImg):not(.block.oImg):hover{
+.board.xImg .block:not(.block.xImg):not(.block.oImg):hover{
     background: url('../img/xImage.png') no-repeat;
     background-size: 100px 100px;
     background-position: center;
@@ -87,12 +87,15 @@
 }
 
 
-// .board.x:not(.oImg):hover{
-//     background:url('../img/oImage.png') yellow  no-repeat;
-//     background-size: 100px 100px;
-//     background-position: center;
-//     opacity: 0.5;
-// }
+.board.oImg .block:not(.block.xImg):not(.block.oImg):hover{
+    background: url('../img/oImage.png') no-repeat;
+    background-size: 100px 100px;
+    background-position: center;
+    opacity: 0.5;
+}
+
+
+
 
 .startingGame, .winnerWindow, .draw{
     position: fixed;
