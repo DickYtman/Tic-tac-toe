@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.js"
+        integrity="sha512-rozBdNtS7jw9BlC76YF1FQGjz17qQ0J/Vu9ZCFIW374sEy4EZRbRcUZa2RU/MZ90X2mnLU56F75VfdToGV0RiA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <title>Document</title>
+    </head>
+<link rel="stylesheet" href="../public/gamePage.scss">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicTacToe</title>
-</head>
-<link rel="stylesheet" href="./dist/startGame.css">
-
-<body>
-    <div class="startingGame  hide">
+<body onload="handleLoad()">
+    <div id="root">
+    <div class="startingGame hide">
         <h1 class="selectPlayer">Select your Player </h1>
         <div class="profile">
             <div class="imgPlayer">
@@ -33,7 +36,6 @@
             <div class="block" id="7" data-cell></div>
             <div class="block" id="8" data-cell></div>
             <div class="block" id="9" data-cell></div>
-<!-- >>>>>>> 1c4df4e167d2241fe7a6974559ff213da50d6826 -->
         </div>
     </div>
         <!--Draw,No winners window-->
@@ -49,8 +51,8 @@
         <div class="winner"></div>
         <button class="primaryBtn" id="playAgainBtn">Play Again</button>
       </div>
-
-<script src="./dist/startGame.js"></script>
+    </div>
+<script src="../public/gamePage.ts"></script>
   
 </body>
 

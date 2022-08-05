@@ -79,6 +79,7 @@ var statusText = document.querySelector("#statusText");
 var restartBtn = document.querySelector("#restartBtn");
 var winConditions = [
     [0, 1, 2],
+    // <<<<<<< Updated upstream
     [3, 4, 5],
     [6, 7, 8,],
     [0, 3, 6],
@@ -106,3 +107,6 @@ function checkWinner() {
 }
 function restartGame() {
 }
+// =======
+//   }
+// >>>>>>> Stashed changes
