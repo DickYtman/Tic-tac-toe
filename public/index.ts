@@ -24,41 +24,29 @@ interface userRegister {
     }
 }
 
- const handleRegistration = async(ev) => {
+const handleRegistration = async (ev) => {
     try {
         const {
             firstName: { value: firstName },
             email: { value: email },
             password: { value: password },
-        } = inputScraper(ev) 
-        
-    const { data } = await axios.post('/users/user-register', {
-        firstName,
-        email,
-        password
-    })
+        } = inputScraper(ev)
 
-    const { userError, user, registerError, token } = data
+        const { data } = await axios.post('/users/user-register', {
+            firstName,
+            email,
+            password
+        })
 
-    if(token) {
-        window.localStorage.setItem('token', `${token}`) 
-    }
+        const { userError, user } = data
 
-
-    if(registerError) {
-        // let index = registerError.message.search('Please');
-        // alert(`${registerError.message.slice(index)}`);     
-          
-    }
-    
-    if (userError) {
-        document.querySelector('#errorUser').innerHTML = userError
-    }
-   
-    // if user exists registered to gamePage page
-    if(user) {
-        window.location.href= `./gamePage.html?userId=${user._id}`
-    }
+        if (userError) {
+            document.querySelector('#errorUser').innerHTML = userError
+        }
+        console.log(userError);
+        if (user) {
+            window.location.href = `./game.html?userId=${user._id}`
+        }
 
     } catch (error) {
         alert(`Please fill all the fields`);  
@@ -66,11 +54,11 @@ interface userRegister {
     }
 }
 
-const handleLogin = async(ev) => {
+const handleLogin = async (ev) => {
     try {
         const {
             email: { value: email },
-            password: { value:password }
+            password: { value: password }
         } = inputScraper(ev)
 
         const { data } = await axios.post('/users/user-login', {
@@ -78,9 +66,9 @@ const handleLogin = async(ev) => {
             password
         })
 
-        const { user } = data
-        if (user) {
-            window.location.href= `./gamePage.html?userId=${user._id}`
+        const { userExists } = data
+        if (userExists) {
+            window.location.href = `./game.html?userId=${userExists._id}`
         }
     } catch (error) {
  
@@ -89,13 +77,13 @@ const handleLogin = async(ev) => {
 }
 
 
-const getUserByCookie = async() => {
+const getUserByCookie = async () => {
     try {
         const { data } = await axios.get('/users/get-user')
 
         const { userDB } = data
         if (userDB) {
-            window.location.href= `./gamePage.html?userId=${userDB._id}`
+            window.location.href = `./game.html?userId=${userDB._id}`
         }
     } catch (error) {
         console.log(error);
@@ -108,19 +96,21 @@ const getUserByCookie = async() => {
 const inputScraper = (event) => {
     event.preventDefault()
     let inputObject = {}
-    const element = event.target 
+    const element = event.target
 
-    for( let i = 0; i < element.length; i++ ) {
+    for (let i = 0; i < element.length; i++) {
         if (element[i].name && element[i].value) {
-            inputObject[element[i].name] = {    value: element[i].value,
-                                                name: element[i].name,
-                                                type: element[i].type   }
+            inputObject[element[i].name] = {
+                value: element[i].value,
+                name: element[i].name,
+                type: element[i].type
+            }
         } else {
             inputObject[element[i].name] = {
-                                                value: '',
-                                                name: element[i].name,
-                                                type: element[i].type
-                                                                        }
+                value: '',
+                name: element[i].name,
+                type: element[i].type
+            }
         }
     }
     event.target.reset();

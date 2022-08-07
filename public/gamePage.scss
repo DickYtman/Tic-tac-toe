@@ -1,0 +1,121 @@
+// body{
+// background: rgb(54, 54, 54);
+// }
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.primaryBtn{
+    border: none;
+    background: blue;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    margin-top: 2em;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.primaryBtn:hover{
+    background: green;
+    color:black ;
+}
+
+.text-center{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+// .startingGame.profile.imgPlayer>img{
+//     cursor: pointer;
+// }
+// .startingGame.profile.imgPlayer>img:hover{
+// background-color: yellow;
+// }
+
+.idImg{
+    height: 120px;
+
+}
+
+.startingGame.hide{
+    display: none;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    background-color: grey;
+    row-gap: 3px;
+    column-gap: 3px;
+}
+
+.block{
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.block.xImg , .block.oImg{
+    cursor: not-allowed;
+}
+
+.block.xImg{
+    background: url('../img/xImage.png') no-repeat;
+    background-size: 100px 100px;
+}
+
+.block.oImg{
+    background: url('../img/oImage.png') no-repeat;
+    background-size: 100px 100px;
+}
+
+.board.xImg .block:not(.block.xImg):not(.block.oImg):hover{
+    background: url('../img/xImage.png') no-repeat;
+    background-size: 100px 100px;
+    background-position: center;
+    opacity: 0.5;
+}
+
+
+.board.oImg .block:not(.block.xImg):not(.block.oImg):hover{
+    background: url('../img/oImage.png') no-repeat;
+    background-size: 100px 100px;
+    background-position: center;
+    opacity: 0.5;
+}
+
+
+
+
+.startingGame, .winnerWindow, .draw{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: rgba(49, 49, 49, 0.938)
+}
+
+.draw, .winnerWindow{
+    display: none;
+}
+
+.draw.show, .winnerWindow.show{
+    display: flex;
+}
+
+

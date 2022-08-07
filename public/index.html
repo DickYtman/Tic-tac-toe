@@ -11,7 +11,7 @@
 </head>
 <body onload="handleLoadCookie(event)">
     <form name="registerForm" id="submitRegistration">
-        <h1>Registration:</h1>
+            <h1>Registration:</h1>
         <div class="erroUser" id="errorUser" style="color:red;font-style: italic;"></div>
         <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
         <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
@@ -19,12 +19,13 @@
         <input type="submit"  value="Register" id="registerBtn">
     </form>
     <form name="loginForm" id="submitLogin">
+       
+
         <h1>Login:</h1>
         <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
         <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
         <input type="submit"  value="Login" id="loginBtn">
     </form>
-
 
     <script src="./dist/index.js"></script>
 </body>
