@@ -41,7 +41,7 @@ var handleLoadCookie = function (ev) {
     getUserByCookie();
 };
 var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, firstName, email, password, data, userError, user, error_1;
+    var _a, firstName, email, password, data, userError, user, registerError, token, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -54,25 +54,33 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userError = data.userError, user = data.user;
+                userError = data.userError, user = data.user, registerError = data.registerError, token = data.token;
+                if (token) {
+                    window.localStorage.setItem('token', "" + token);
+                }
+                if (registerError) {
+                    // let index = registerError.message.search('Please');
+                    // alert(`${registerError.message.slice(index)}`);     
+                }
                 if (userError) {
                     document.querySelector('#errorUser').innerHTML = userError;
                 }
-                console.log(userError);
+                // if user exists registered to gamePage page
                 if (user) {
-                    window.location.href = "./game.html?userId=" + user._id;
+                    window.location.href = "./gamePage.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _b.sent();
-                console.log(error_1);
+                alert("Please fill all the fields");
+                console.error(error_1);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
 var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, email, password, data, userExists, error_2;
+    var _a, email, password, data, user, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -84,9 +92,9 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userExists = data.userExists;
-                if (userExists) {
-                    window.location.href = "./game.html?userId=" + userExists._id;
+                user = data.user;
+                if (user) {
+                    window.location.href = "./gamePage.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
@@ -108,7 +116,7 @@ var getUserByCookie = function () { return __awaiter(_this, void 0, void 0, func
                 data = (_a.sent()).data;
                 userDB = data.userDB;
                 if (userDB) {
-                    window.location.href = "./game.html?userId=" + userDB._id;
+                    window.location.href = "./gamePage.html?userId=" + userDB._id;
                 }
                 return [3 /*break*/, 3];
             case 2:

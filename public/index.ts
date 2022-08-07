@@ -38,18 +38,31 @@ interface userRegister {
         password
     })
 
-    const { userError, user } = data
+    const { userError, user, registerError, token } = data
+
+    if(token) {
+        window.localStorage.setItem('token', `${token}`) 
+    }
+
+
+    if(registerError) {
+        // let index = registerError.message.search('Please');
+        // alert(`${registerError.message.slice(index)}`);     
+          
+    }
     
     if (userError) {
         document.querySelector('#errorUser').innerHTML = userError
     }
-console.log(userError);
+   
+    // if user exists registered to gamePage page
     if(user) {
-        window.location.href= `./game.html?userId=${user._id}`
+        window.location.href= `./gamePage.html?userId=${user._id}`
     }
 
     } catch (error) {
-        console.log(error)
+        alert(`Please fill all the fields`);  
+        console.error(error)
     }
 }
 
@@ -65,11 +78,12 @@ const handleLogin = async(ev) => {
             password
         })
 
-        const { userExists } = data
-        if (userExists) {
-            window.location.href= `./game.html?userId=${userExists._id}`
+        const { user } = data
+        if (user) {
+            window.location.href= `./gamePage.html?userId=${user._id}`
         }
     } catch (error) {
+ 
         console.log(error);
     }
 }
@@ -77,13 +91,11 @@ const handleLogin = async(ev) => {
 
 const getUserByCookie = async() => {
     try {
-
-
         const { data } = await axios.get('/users/get-user')
 
         const { userDB } = data
         if (userDB) {
-            window.location.href= `./game.html?userId=${userDB._id}`
+            window.location.href= `./gamePage.html?userId=${userDB._id}`
         }
     } catch (error) {
         console.log(error);

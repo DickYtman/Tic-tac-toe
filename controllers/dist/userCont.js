@@ -36,10 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getUser = exports.deleteUser = exports.updateUser = exports.getUserByCookie = exports.loginUser = exports.registerUser = void 0;
+exports.getUser = exports.deleteUser = exports.updateUserImage = exports.updateUser = exports.getUserByCookie = exports.loginUser = exports.registerUser = void 0;
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var userModel_1 = require("../models/userModel");
+var cloudinary = require('../utils/cloudinary');
+// Generate JWT
 var generateToken = function (id) {
     return jsonwebtoken_1["default"].sign({ id: id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
@@ -49,13 +51,14 @@ var generateToken = function (id) {
 // @route Post /users/register-user
 // access public
 exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, firstName, email, password, userExists, userError, salt, hashedPassword, user, error_1;
+    var _a, firstName, email, password, userExists, userError, salt, hashedPassword, user, error_1, registerError;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 7, , 8]);
                 _a = req.body, firstName = _a.firstName, email = _a.email, password = _a.password;
-                if (!firstName && !email && !password) {
+                console.log(firstName, email, password);
+                if (!password) {
                     res.status(400);
                     throw new Error('Please fill all the fields');
                 }
@@ -65,8 +68,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
                 if (!userExists) return [3 /*break*/, 2];
                 userError = (email + " already exists");
                 res.send({ userError: userError });
-                res.status(400);
-                throw new Error(email + " already exists");
+                return [3 /*break*/, 6];
             case 2: return [4 /*yield*/, bcryptjs_1["default"].genSalt(10)];
             case 3:
                 salt = _b.sent();
@@ -82,11 +84,16 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
                     })];
             case 5:
                 user = _b.sent();
-                res.send({ user: user });
+                res.send({
+                    user: user,
+                    token: generateToken(user._id)
+                });
                 _b.label = 6;
             case 6: return [3 /*break*/, 8];
             case 7:
                 error_1 = _b.sent();
+                registerError = error_1;
+                res.send({ registerError: registerError });
                 console.error(error_1);
                 return [3 /*break*/, 8];
             case 8: return [2 /*return*/];
@@ -97,7 +104,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
 // @route Post /users/login-user
 // access public
 exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, userExists, _b, error_2;
+    var _a, email, password, user, _b, error_2;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -105,17 +112,20 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
                 _a = req.body, email = _a.email, password = _a.password;
                 return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
             case 1:
-                userExists = _c.sent();
-                _b = userExists;
+                user = _c.sent();
+                _b = user;
                 if (!_b) return [3 /*break*/, 3];
-                return [4 /*yield*/, bcryptjs_1["default"].compare(password, userExists.password)];
+                return [4 /*yield*/, bcryptjs_1["default"].compare(password, user.password)];
             case 2:
                 _b = (_c.sent());
                 _c.label = 3;
             case 3:
                 if (_b) {
-                    res.cookie('userExists', userExists._id);
-                    res.send({ userExists: userExists });
+                    res.cookie('user', user._id);
+                    res.send({
+                        user: user,
+                        token: generateToken(user._id)
+                    });
                 }
                 else {
                     res.status(400);
@@ -132,17 +142,16 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
 }); };
 // Get user by cookie
 exports.getUserByCookie = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userExists, userDB, error_3;
+    var user, userDB, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                userExists = req.cookies.userExists;
-                console.log(userExists);
-                if (!userExists) {
+                user = req.cookies.user;
+                if (!user) {
                     throw new Error('User not found');
                 }
-                return [4 /*yield*/, userModel_1["default"].findById(userExists)];
+                return [4 /*yield*/, userModel_1["default"].findById(user)];
             case 1:
                 userDB = _a.sent();
                 if (!userDB) {
@@ -163,23 +172,66 @@ exports.getUserByCookie = function (req, res) { return __awaiter(void 0, void 0,
 // @route PUT /users/user-card/:id
 // Access Private
 exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, updateUser;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
-            case 1:
-                user = _a.sent();
-                if (!user) {
+    var _a, userProp, userValue, userId, options, updateUser_1, error_4;
+    var _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _c.trys.push([0, 2, , 3]);
+                _a = req.body, userProp = _a.userProp, userValue = _a.userValue, userId = _a.userId;
+                options = { "new": true };
+                if (!userProp) {
                     res.status(400);
                     throw new Error('User not found');
                 }
-                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate(req.params.id, req.body, {
-                        "new": true
+                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate({ _id: userId }, (_b = {}, _b[userProp] = userValue, _b), options)];
+            case 1:
+                updateUser_1 = _c.sent();
+                console.log(userValue);
+                if (updateUser_1[userProp] === userValue) {
+                    console.log(updateUser_1);
+                    res.send({ updateUser: updateUser_1 });
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _c.sent();
+                console.error(error_4);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.updateUserImage = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, picture, userId, result, options, updateUser_2, error_5;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.body, picture = _a.picture, userId = _a.userId;
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 4, , 5]);
+                return [4 /*yield*/, cloudinary.uploader.upload(picture, {
+                        folder: "users"
                     })];
             case 2:
-                updateUser = _a.sent();
-                res.status(200).json(updateUser);
-                return [2 /*return*/];
+                result = _b.sent();
+                options = { "new": true };
+                return [4 /*yield*/, userModel_1["default"].findByIdAndUpdate({ _id: userId }, { image: {
+                            public_id: result.public_id,
+                            url: result.secure_url
+                        }
+                    }, options)];
+            case 3:
+                updateUser_2 = _b.sent();
+                res.send({
+                    updateUser: updateUser_2
+                });
+                return [3 /*break*/, 5];
+            case 4:
+                error_5 = _b.sent();
+                console.error(error_5);
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
@@ -195,7 +247,7 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
                 return [4 /*yield*/, userModel_1["default"].findById(req.params.id)];
             case 1:
                 user = _a.sent();
-                console.log(user);
+                console.log(user.firstName);
                 if (!user) {
                     res.status(400);
                     throw new Error('User not found');
@@ -208,21 +260,24 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
+// Get User
+// @route GET /users/get-user-card/:id
+// Access Private
 exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userId, user, error_4;
+    var id, user, error_6;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                userId = req.body.userId;
-                return [4 /*yield*/, userModel_1["default"].findById(userId)];
+                id = req.params.id;
+                return [4 /*yield*/, userModel_1["default"].findById(id)];
             case 1:
                 user = _a.sent();
                 res.send({ user: user });
                 return [3 /*break*/, 3];
             case 2:
-                error_4 = _a.sent();
-                console.log(error_4);
+                error_6 = _a.sent();
+                console.log(error_6);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

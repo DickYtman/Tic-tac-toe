@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cardWrapper .userImageWrapper .imageCont {
+  height: 15rem;
+  width: 15rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 250px;
+  background-color: lightgray;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+.cardWrapper .userImageWrapper .imageCont img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.cardWrapper .userImageWrapper .imageCont .uploadFolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.cardWrapper .userImageWrapper .imageCont .uploadFolder input {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+}
+.cardWrapper #root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.cardWrapper #root .userCardWrapper {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cardWrapper #root .userCardWrapper .userParamCont {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardWrapper #root .userCardWrapper .userParamCont #editIcon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  cursor: pointer;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+}
+.cardWrapper #root .userCardWrapper .userParamCont #buttonEdit {
+  width: 40px;
+  height: 50px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+.cardWrapper #root .userCardWrapper .userParamCont #editIconSave {
+  cursor: pointer;
+}

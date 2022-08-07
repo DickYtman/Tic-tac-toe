@@ -2,33 +2,16 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import asyncHandler from 'express-async-handler'
 import UserModel from '../models/userModel'
+const cloudinary = require('../utils/cloudinary')
 
-
-
+// Generate JWT
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
     })
 }
 
-interface User {
-    _id,
-    firstName: {
-        value: string,
-        type: string,
-        name: string
-    },
-    email: {
-        value: string,
-        type: string,
-        name: string
-    },
-    password: {
-        value: number,
-        type: string,
-        name: string
-    }
-}
+
 // register new User
 // @route Post /users/register-user
 // access public
@@ -36,8 +19,8 @@ interface User {
 export const registerUser = async(req, res) => {
     try {
     const { firstName, email, password } = req.body
-
-    if(!firstName && !email && !password) {
+console.log(firstName, email, password);
+    if(!password) {
         res.status(400)
         throw new Error('Please fill all the fields')
     }
@@ -48,35 +31,29 @@ export const registerUser = async(req, res) => {
         res.send(
             { userError }
         )
-        res.status(400)
-        throw new Error(`${email} already exists`)
+
     } else {
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
+        // Hash password
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+            
+        //Create user
+        const user = await UserModel.create({
+            firstName,
+            email,
+            password:hashedPassword    
+        })
 
-    //Create user
-    const user = await UserModel.create({
-        firstName,
-        email,
-        password:hashedPassword
-    })
-    res.send( {user} )
-    // if(user) {
-    //     res.status(201).json({
-    //         _id: user.id,
-    //         firstName: user.firstName,
-    //         email: user.email,
-    //         password: user.password,
-    //         token: generateToken(user._id),
-    //     })
-    // } else {
-    //     res.status(400)
-    //     throw new Error('Invalid user data')
-    // }
-}
-    } catch(error) {
+        res.send({
+            user, 
+            token: generateToken(user._id)
+        })
+
+    }   
+       } catch(error) {
+        const registerError = error
+        res.send({registerError})
         console.error(error);
     }
 }
@@ -89,12 +66,17 @@ export const registerUser = async(req, res) => {
 export const loginUser = async(req, res) => {
     try {
     const { email, password } = req.body
-
+    
     // check for user email
-    const userExists = await UserModel.findOne( {email} )
-    if(userExists && (await bcrypt.compare(password, userExists.password))) {
-        res.cookie('userExists', userExists._id)
-        res.send( {userExists} )
+    const user = await UserModel.findOne( {email} )
+
+    if(user && (await bcrypt.compare(password, user.password))) {
+        res.cookie('user', user._id)
+        res.send({
+            user,
+            token: generateToken(user._id)
+        })
+
     } else {
         res.status(400)
         throw new Error('Invalid credentials')
@@ -106,16 +88,14 @@ export const loginUser = async(req, res) => {
 
 
 // Get user by cookie
-
 export const getUserByCookie = async(req, res) => {
     try {
-        const { userExists } = req.cookies
-        console.log(userExists);
-        if(!userExists) {
+        const { user } = req.cookies
+        if(!user) {
             throw new Error('User not found')
         }
 
-        const userDB = await UserModel.findById( userExists )
+        const userDB = await UserModel.findById( user )
         if(!userDB) {
             throw new Error('userDB not found' )
         }
@@ -132,18 +112,59 @@ export const getUserByCookie = async(req, res) => {
 // Access Private
 
 export const updateUser = async(req, res) => {
-    const user = await UserModel.findById(req.params.id)
+    try {
+        const { userProp, userValue, userId } = req.body
+        const options = { new: true }
 
-    if(!user) {
-        res.status(400)
-        throw new Error('User not found')
-    } 
-
-    const updateUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
-            new: true
-        })
+        if(!userProp) {
+            res.status(400)
+            throw new Error('User not found')
+        } 
     
-    res.status(200).json(updateUser)
+        const updateUser = await UserModel.findByIdAndUpdate( 
+                {_id: userId},     
+                {[userProp] : userValue},
+                options
+        )
+            console.log(userValue);
+        if( updateUser[userProp] === userValue) {
+            console.log(updateUser);
+            res.send(
+                { updateUser }
+            )
+        }
+
+    } catch (error) {
+        console.error(error)
+    }
+    
+}
+
+export const updateUserImage = async(req, res) => {
+    const { picture, userId } = req.body
+    try{
+        const result = await cloudinary.uploader.upload(picture, {
+            folder: "users",
+        })
+        const options = { new: true }
+
+        const updateUser = await UserModel.findByIdAndUpdate( 
+            {_id: userId},
+                {image: {
+                    public_id: result.public_id,
+                    url: result.secure_url
+                }
+            }       
+            ,
+            options
+    )
+    res.send({
+        updateUser
+    })
+
+    } catch(error) {
+        console.error(error)
+    }
 }
 
 
@@ -154,7 +175,7 @@ export const updateUser = async(req, res) => {
 export const deleteUser = async (req, res) => {
     console.log('hello');
     const user = await UserModel.findById(req.params.id)
-    console.log(user);
+    console.log(user.firstName);
     if(!user) {
         res.status(400)
         throw new Error('User not found')
@@ -166,12 +187,16 @@ export const deleteUser = async (req, res) => {
 }
 
 
+// Get User
+// @route GET /users/get-user-card/:id
+// Access Private
 export const getUser = async(req, res) => {
     try{
-    const { userId } = req.body
-    const user = await UserModel.findById(userId)
+    const id = req.params.id
+    const user = await UserModel.findById(id)
     res.send( {user} )
     } catch(error) {
         console.log(error)
     }
 }
+
