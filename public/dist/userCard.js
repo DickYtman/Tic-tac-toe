@@ -53,7 +53,7 @@ var handleLoad = function () {
 };
 // render User for game page
 var renderGamePageUser = function () { return __awaiter(_this, void 0, void 0, function () {
-    var userID, data, user, root;
+    var userID, data, user, userCardId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -62,8 +62,8 @@ var renderGamePageUser = function () { return __awaiter(_this, void 0, void 0, f
             case 1:
                 data = (_a.sent()).data;
                 user = data.user;
-                root = document.querySelector('#root');
-                root.innerHTML =
+                userCardId = document.querySelector('#userCardId');
+                userCardId.innerHTML =
                     "<div class=\"userWrapper\">\n                    <a href='userCard.html?userId=" + userID + "'>\n                         <h1>Hello " + user.firstName + "</h1>\n                    </a>\n               </div>";
                 return [2 /*return*/];
         }
@@ -144,7 +144,7 @@ var renderUserImage = function () { return __awaiter(_this, void 0, void 0, func
 }); };
 // render User on User card page
 var renderUserCard = function () { return __awaiter(_this, void 0, void 0, function () {
-    var userID, data, user, root;
+    var userID, data, user, root2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -153,8 +153,8 @@ var renderUserCard = function () { return __awaiter(_this, void 0, void 0, funct
             case 1:
                 data = (_a.sent()).data;
                 user = data.user;
-                root = document.querySelector('#root');
-                root.innerHTML = "\n          <div class=\"userCardWrapper\">\n\n               <div class=\"userParamCont\">\n                    <p>First name: " + user.firstName + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"firstName\" >\n                         <lottie-interactive accessKey=\"firstName\" lang=\"text\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n               \n               <div class=\"userParamCont \">\n                    <p>Last name: " + user.lastName + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"lastName\" >\n                         <lottie-interactive accessKey=\"lastName\" lang=\"text\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n\n               <div class=\"userParamCont \">\n                    <p>Phone number: " + user.phoneNum + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"phoneNum\" >\n                         <lottie-interactive accessKey=\"phoneNum\" lang=\"number\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n\n               <div class=\"userParamCont \">\n                    <p>Birth date: " + user.birthDate + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"birthDate\" >\n                         <lottie-interactive accessKey=\"birthDate\" lang=\"date\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n     \n               <div class=\"userParamCont \">\n                    <p>Email: " + user.email + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"email\" >\n                         <lottie-interactive accessKey=\"email\" lang=\"email\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n          </div>\n                    ";
+                root2 = document.querySelector('#root2');
+                root2.innerHTML = "\n          <div class=\"userCardWrapper\">\n\n               <div class=\"userParamCont\">\n                    <p>First name: " + user.firstName + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"firstName\" >\n                         <lottie-interactive accessKey=\"firstName\" lang=\"text\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n               \n               <div class=\"userParamCont \">\n                    <p>Last name: " + user.lastName + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"lastName\" >\n                         <lottie-interactive accessKey=\"lastName\" lang=\"text\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n\n               <div class=\"userParamCont \">\n                    <p>Phone number: " + user.phoneNum + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"phoneNum\" >\n                         <lottie-interactive accessKey=\"phoneNum\" lang=\"number\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n\n               <div class=\"userParamCont \">\n                    <p>Birth date: " + user.birthDate + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"birthDate\" >\n                         <lottie-interactive accessKey=\"birthDate\" lang=\"date\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n     \n               <div class=\"userParamCont \">\n                    <p>Email: " + user.email + "</p>\n\n                    <button id=\"buttonEdit\" style= \"margin-right: 0.7rem; \"margin-bottom: 0.7rem;\" onclick = \"handleLoadUserCard(event)\" name=\"email\" >\n                         <lottie-interactive accessKey=\"email\" lang=\"email\" style=\"width: 30px; height: 40px; \" path=\"./lottieAnimations/edit-icon-vector.json\" interaction=\"morph\"></lottie-interactive>\n                    </button>\n               </div>\n          </div>\n                    ";
                 return [2 /*return*/];
         }
     });

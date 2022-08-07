@@ -22,15 +22,15 @@
           //@ts-ignore
           const { data } = await axios.get(`/users/get-user-card/${userID}`)
           const { user } = data
-          const root = document.querySelector('#root')
-          root.innerHTML = 
+          
+          const userCardId = document.querySelector('#userCardId')
+          userCardId.innerHTML = 
                `<div class="userWrapper">
                     <a href='userCard.html?userId=${userID}'>
                          <h1>Hello ${user.firstName}</h1>
                     </a>
                </div>`
      }
-
 
      // render User on User Page
      const handleLoadUser = () => {
@@ -63,6 +63,7 @@
      async function handleProfileCardSend() {
           console.log(picture);
           const userId = getUserId()         
+          //@ts-ignore
           const { data } = await axios.patch('/users/update-user-image', {
                picture,
                userId
@@ -118,8 +119,8 @@
           //@ts-ignore
           const { data } = await axios.get(`/users/get-user-card/${userID}`)
           const { user } = data
-          const root = document.querySelector('#root')
-          root.innerHTML = `
+          const root2 = document.querySelector('#root2')
+          root2.innerHTML = `
           <div class="userCardWrapper">
 
                <div class="userParamCont">

@@ -38,7 +38,7 @@
   height: 0px;
   opacity: 0;
 }
-.cardWrapper #root {
+.cardWrapper #root2 {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -46,20 +46,20 @@
   align-items: center;
   overflow: hidden;
 }
-.cardWrapper #root .userCardWrapper {
+.cardWrapper #root2 .userCardWrapper {
   width: 70%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-start;
 }
-.cardWrapper #root .userCardWrapper .userParamCont {
+.cardWrapper #root2 .userCardWrapper .userParamCont {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.cardWrapper #root .userCardWrapper .userParamCont #editIcon {
+.cardWrapper #root2 .userCardWrapper .userParamCont #editIcon {
   width: 50px;
   height: 50px;
   display: flex;
@@ -68,7 +68,7 @@
   background-repeat: no-repeat;
   border: none;
 }
-.cardWrapper #root .userCardWrapper .userParamCont #buttonEdit {
+.cardWrapper #root2 .userCardWrapper .userParamCont #buttonEdit {
   width: 40px;
   height: 50px;
   background-color: transparent;
@@ -78,6 +78,6 @@
   overflow: hidden;
   outline: none;
 }
-.cardWrapper #root .userCardWrapper .userParamCont #editIconSave {
+.cardWrapper #root2 .userCardWrapper .userParamCont #editIconSave {
   cursor: pointer;
 }
