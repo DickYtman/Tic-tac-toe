@@ -45,7 +45,7 @@ const handleRegistration = async (ev) => {
         }
         console.log(userError);
         if (user) {
-            window.location.href = `./game.html?userId=${user._id}`
+            window.location.href = `./gamePage.html?userId=${user._id}`
         }
 
     } catch (error) {
@@ -68,7 +68,7 @@ const handleLogin = async (ev) => {
 
         const { userExists } = data
         if (userExists) {
-            window.location.href = `./game.html?userId=${userExists._id}`
+            window.location.href = `./gamePage.html?userId=${userExists._id}`
         }
     } catch (error) {
  
@@ -83,7 +83,7 @@ const getUserByCookie = async () => {
 
         const { userDB } = data
         if (userDB) {
-            window.location.href = `./game.html?userId=${userDB._id}`
+            window.location.href = `./gamePage.html?userId=${userDB._id}`
         }
     } catch (error) {
         console.log(error);

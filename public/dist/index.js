@@ -41,7 +41,7 @@ var handleLoadCookie = function (ev) {
     getUserByCookie();
 };
 var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, firstName, email, password, data, userError, user, registerError, token, error_1;
+    var _a, firstName, email, password, data, userError, user, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -54,18 +54,11 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userError = data.userError, user = data.user, registerError = data.registerError, token = data.token;
-                if (token) {
-                    window.localStorage.setItem('token', "" + token);
-                }
-                if (registerError) {
-                    // let index = registerError.message.search('Please');
-                    // alert(`${registerError.message.slice(index)}`);     
-                }
+                userError = data.userError, user = data.user;
                 if (userError) {
                     document.querySelector('#errorUser').innerHTML = userError;
                 }
-                // if user exists registered to gamePage page
+                console.log(userError);
                 if (user) {
                     window.location.href = "./gamePage.html?userId=" + user._id;
                 }
@@ -80,7 +73,7 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
     });
 }); };
 var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, email, password, data, user, error_2;
+    var _a, email, password, data, userExists, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -92,9 +85,9 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
                     })];
             case 1:
                 data = (_b.sent()).data;
-                user = data.user;
-                if (user) {
-                    window.location.href = "./gamePage.html?userId=" + user._id;
+                userExists = data.userExists;
+                if (userExists) {
+                    window.location.href = "./gamePage.html?userId=" + userExists._id;
                 }
                 return [3 /*break*/, 3];
             case 2:

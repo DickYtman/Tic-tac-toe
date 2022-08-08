@@ -25,11 +25,11 @@
           
           const userCardId = document.querySelector('#userCardId')
           userCardId.innerHTML = 
-               `<div class="userWrapper">
+               `
                     <a href='userCard.html?userId=${userID}'>
                          <h1>Hello ${user.firstName}</h1>
                     </a>
-               </div>`
+               `
      }
 
      // render User on User Page

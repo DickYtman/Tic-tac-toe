@@ -64,7 +64,7 @@ var renderGamePageUser = function () { return __awaiter(_this, void 0, void 0, f
                 user = data.user;
                 userCardId = document.querySelector('#userCardId');
                 userCardId.innerHTML =
-                    "<div class=\"userWrapper\">\n                    <a href='userCard.html?userId=" + userID + "'>\n                         <h1>Hello " + user.firstName + "</h1>\n                    </a>\n               </div>";
+                    "\n                    <a href='userCard.html?userId=" + userID + "'>\n                         <h1>Hello " + user.firstName + "</h1>\n                    </a>\n               ";
                 return [2 /*return*/];
         }
     });

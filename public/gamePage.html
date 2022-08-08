@@ -4,28 +4,27 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./dist/gamePage.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.js"
         integrity="sha512-rozBdNtS7jw9BlC76YF1FQGjz17qQ0J/Vu9ZCFIW374sEy4EZRbRcUZa2RU/MZ90X2mnLU56F75VfdToGV0RiA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <title>Document</title>
     </head>
-<link rel="stylesheet" href="./dist/gamePage.css">
 
-<body onload="handleLoad()">
-    <div id="root">
-        <div class="userCard" id="userCardId">
-            
-        </div>
-    <div class="startingGame">
-        <h1 class="selectPlayer">Select your Player </h1>
-        <div class="profile">
-            <div class="imgPlayer">
-                <img src="./img/xImage.png" class="idImg" data-id="xImg" alt="">
-                <img src="./img/oImage.png" class="idImg" data-id="oImg" alt="">
+    <body onload="handleLoad()">
+
+        <div id="root">
+        <div class="startingGame">
+            <div class="userCard" id="userCardId"></div>
+            <h1 class="selectPlayer">Select your Weapon </h1>
+            <div class="profile">
+                <div class="imgPlayer">
+                    <img src="./img/xImage.png" class="idImg" data-id="xImg" alt="">
+                    <img src="./img/oImage.png" class="idImg" data-id="oImg" alt="">
+                </div>
             </div>
+            <button class="primaryBtn" id="startBtnId">Let's Start</button>
         </div>
-        <button class="primaryBtn" id="startBtnId">Let's Start</button>
-    </div>
     <!--game board-->
     <div class="container">
         <div class="board " id="board">
@@ -56,9 +55,9 @@
       </div>
 
     </div>
+    <script src="./dist/userCard.js"></script>
+    <script src="./dist/gamePage.js"></script>
 </body>
-<script src="./dist/userCard.js"></script>
-<script src="./dist/gamePage.js"></script>
 </html>
 
 

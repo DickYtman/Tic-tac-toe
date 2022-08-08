@@ -14,38 +14,37 @@
 <body onload="handleLoadCookie(event)">
     <div class="wrapper" id="wrapper">
 
-    <div class="formsContainer">
+        <div class="formsContainer">
 
-        <div class="signContainer">
-            <form name="loginForm" id="submitLogin" class="signinForm">        
-                <h2 class="title">Login:</h2>
-                <div class="inputField">
-                    <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
-                </div>
-                <div class="inputField">
-                    <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
-                </div>
-                    <input type="submit"  value="Welcome back" id="loginBtn" class="btn">
-            </form>
+            <div class="signContainer">
+                <form name="loginForm" id="submitLogin" class="signinForm">        
+                    <h2 class="title">Login:</h2>
+                    <div class="inputField">
+                        <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
+                    </div>
+                        <input type="submit"  value="Welcome back" id="loginBtn" class="btn">
+                </form>
+            </div>
+
+            <div class="signContainer">
+                <form name="registerForm" id="submitRegistration" class="registerForm">
+                    <h2 class="title">Registration:</h2>
+                    <div class="inputField">
+                        <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="false">
+                    </div>
+                        <input type="submit"  value="Register" id="registerBtn" class="btn">
+                </form>
+            </div>
         </div>
-
-        <div class="signContainer">
-            <form name="registerForm" id="submitRegistration" class="registerForm">
-                <h2 class="title">Registration:</h2>
-                <div class="inputField">
-                    <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
-                </div>
-                <div class="inputField">
-                    <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
-                </div>
-                <div class="inputField">
-                    <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="false">
-                </div>
-                    <input type="submit"  value="Register" id="registerBtn" class="btn">
-            </form>
-</div>
-
-</div>
 
 <div class="panelContainer">
 
