@@ -8,7 +8,7 @@ interface Score {
     o: number
 
 }
-// creting the display of the game (game board)
+// creating the display of the game (game board)
 class DOMDisplay implements Display {
     bindHandler(clickHandler: (row: number, col: number) => void): void {
         document.addEventListener('click', (event: Event) => {

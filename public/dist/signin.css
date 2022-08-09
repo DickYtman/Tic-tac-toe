@@ -10,12 +10,12 @@ body, input {
 
 .wrapper {
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   overflow: hidden;
 }
 
-.wrapper::before {
+.wrapper:before {
   content: "";
   position: absolute;
   width: 2000px;
@@ -37,16 +37,28 @@ body, input {
   left: 0;
 }
 
-.signContainer {
-  position: fixed;
+.signinContainer {
+  position: absolute;
   top: 50%;
-  left: 75%;
   transform: translate(-50%, -50%);
+  left: 75%;
   width: 50%;
   transition: 1s 0.7s ease-in-out;
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
+}
+
+.signupContainer {
+  position: absolute;
+  bottom: 15%;
+  right: 25%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  transition: 1s 0.7s ease-in-out;
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 4;
 }
 
 form {
@@ -55,15 +67,15 @@ form {
   justify-content: center;
   flex-direction: column;
   padding: 0 5rem;
-  transition: 0.2s 0.7s ease-in-out;
+  transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1/2;
   grid-row: 1/2;
 }
 
 form.registerForm {
-  z-index: 1;
   opacity: 0;
+  z-index: 1;
 }
 
 form.signinForm {
@@ -125,8 +137,8 @@ form.signinForm {
 
 .panelContainer {
   position: absolute;
-  width: 100vw;
-  height: 100hw;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   display: grid;
@@ -139,7 +151,7 @@ form.signinForm {
   align-items: flex-end;
   justify-content: space-around;
   text-align: center;
-  z-index: 7;
+  z-index: 6;
 }
 
 .leftPanel {

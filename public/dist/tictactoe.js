@@ -1,4 +1,4 @@
-// creting the display of the game (game board)
+// creating the display of the game (game board)
 var DOMDisplay = /** @class */ (function () {
     function DOMDisplay() {
         var _this = this;

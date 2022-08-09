@@ -1,14 +1,14 @@
 const signInBtn = document.querySelector("#signInBtn");
 const signUpBtn = document.querySelector("#signUpBtn");
+const wrapper = document.querySelector(".wrapper").classList;
+
 
 signUpBtn.addEventListener('click', () =>{
-    const signUp = document.getElementById("wrapper").classList;
-    signUp.add("signUpMode");
+    wrapper.add("signUpMode");
 })
 
 signInBtn.addEventListener('click', () =>{
-    const signIn = document.getElementById("wrapper").classList;
-    signIn.remove("signUpMode");
+    wrapper.remove("signUpMode");
 })
 
 
