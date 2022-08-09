@@ -38,7 +38,7 @@ body, input {
 }
 
 .signContainer {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 75%;
   transform: translate(-50%, -50%);
@@ -82,7 +82,7 @@ form.signinForm {
   height: 55px;
   margin: 10px 0;
   display: grid;
-  grid-template-columns: 85% 85%;
+  grid-template-columns: 85% 15%;
   color: #f0f0f0;
   padding: 0 0.4rem;
   position: relative;
@@ -93,7 +93,6 @@ form.signinForm {
   outline: none;
   border: 0.01;
   border-radius: 55px;
-  padding: 0 1rem;
   line-height: 1;
   font-weight: 600;
   font-size: 1.1rem;
