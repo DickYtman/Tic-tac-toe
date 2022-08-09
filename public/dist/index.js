@@ -60,7 +60,7 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
                 }
                 console.log(userError);
                 if (user) {
-                    window.location.href = "./gamePage.html?userId=" + user._id;
+                    window.location.href = "./tictactoe.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
@@ -87,7 +87,7 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
                 data = (_b.sent()).data;
                 userExists = data.userExists;
                 if (userExists) {
-                    window.location.href = "./gamePage.html?userId=" + userExists._id;
+                    window.location.href = "./tictactoe.html?userId=" + userExists._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
@@ -109,7 +109,7 @@ var getUserByCookie = function () { return __awaiter(_this, void 0, void 0, func
                 data = (_a.sent()).data;
                 userDB = data.userDB;
                 if (userDB) {
-                    window.location.href = "./gamePage.html?userId=" + userDB._id;
+                    window.location.href = "./tictactoe.html?userId=" + userDB._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
