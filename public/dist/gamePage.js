@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
 var root = document.querySelector('#root');
 var getUserId = function () {
     try {
@@ -48,7 +49,7 @@ var getUserId = function () {
         return false;
     }
 };
-var handleGetUser = function () { return __awaiter(_this, void 0, void 0, function () {
+var handleGetUser = function () { return __awaiter(void 0, void 0, void 0, function () {
     var userId, data, user, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -74,12 +75,11 @@ var handleGetUser = function () { return __awaiter(_this, void 0, void 0, functi
 var handleLoad = function () {
     handleGetUser();
 };
-var cells = document.querySelectorAll(".block");
-var statusText = document.querySelector("#statusText");
-var restartBtn = document.querySelector("#restartBtn");
+var cells = document.querySelectorAll("block");
+var statusText = document.querySelector("statusText");
+var restartBtn = document.querySelector("restartBtn");
 var winConditions = [
     [0, 1, 2],
-    // <<<<<<< Updated upstream
     [3, 4, 5],
     [6, 7, 8,],
     [0, 3, 6],
@@ -91,22 +91,61 @@ var winConditions = [
 var options = ["", "", "", "", "", "", "", "", ""];
 var currentPlayer = "X";
 var running = false;
-gameStarter();
+initializeGame();
 //function that initialize the game
-function gameStarter() {
+function initializeGame() {
     cells.forEach(function (block) { return block.addEventListener("click", cellClicked); });
-    restartBtn.addEventListener("click", restartGame);
+    //  restartBtn.addEventListener("click", restartGame)
+    statusText.textContent = currentPlayer + "'s turn";
 }
 function cellClicked() {
+    var cellIndex = this.getAttribute("cellIndex");
+    if (options[cellIndex] != "" || !running) {
+        return;
+    }
+    updateCell(this, cellIndex);
+    checkWinner();
+    restartGame();
 }
-function updateCell() {
+function updateCell(block, index) {
+    options[index] = currentPlayer;
+    block.textContent = currentPlayer;
 }
 function changePlayer() {
+    currentPlayer = (currentPlayer == "X") ? "O" : "X";
+    statusText.textContent = currentPlayer + "'s turn";
 }
 function checkWinner() {
+    var roundWon = false;
+    for (var i = 0; i < winConditions.length; i++) {
+        var condition = winConditions[i];
+        var cellA = options[condition[0]];
+        var cellB = options[condition[1]];
+        var cellC = options[condition[2]];
+        if (cellA == "" || cellB == "" || cellC == "") {
+            continue;
+        }
+        if (cellA == cellB && cellB == cellC) {
+            roundWon = true;
+            break;
+        }
+    }
+    if (roundWon) {
+        statusText.textContent = currentPlayer + " wins!";
+        running = false;
+    }
+    else if (options.includes("")) {
+        statusText.textContent = "Draw!";
+        running = false;
+    }
+    else {
+        changePlayer();
+    }
 }
 function restartGame() {
+    currentPlayer = "X";
+    options = ["", "", "", "", "", "", "", "", ""];
+    statusText.textContent = currentPlayer + "'s turn";
+    cells.forEach(function (block) { return block.textContent = ""; });
+    running = true;
 }
-// =======
-//   }
-// >>>>>>> Stashed changes
