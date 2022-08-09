@@ -22,6 +22,7 @@ h1{
     transform: translate(-50%, -50%);
     border: 0.1rem solid #1cd81fb6;
     background-color: #afafaf7a;
+    box-shadow: 0.2rem 0.2rem 0.05rem rgb(0, 0, 0);
 } 
 
 .cardWrapper{
@@ -34,6 +35,7 @@ h1{
     border: 0.1rem dashed #1cd81fb6;
     z-index: 1;
     .userImageWrapper{
+
         .imageCont{
             height: 15rem;
             width: 15rem;
@@ -79,7 +81,6 @@ h1{
     }
     
     #root2 {
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -120,9 +121,7 @@ h1{
                     width: 40px;
                     height: 40px;
                     display: flex;
-      
-                    cursor: pointer;
-    
+                    cursor: pointer;   
                     background-color: Transparent;
                     background-repeat:no-repeat;
                     border: none;           
@@ -142,8 +141,7 @@ h1{
     
                 #editIconSave{
                     cursor: pointer;
-                    
-                  
+                                 
                 }
     
             }
@@ -152,11 +150,3 @@ h1{
     
     }
 }
-
-
-
-
-
-
-
-//  
