@@ -39,20 +39,22 @@
             <div class="block" id="8" data-cell></div>
             <div class="block" id="9" data-cell></div>
         </div>
-    </div>
         <!--Draw,No winners window-->
         <div class="draw">
             <div class="restartText">
-        <h1 class="text-center" id="statusText">Try Again</h1>
+                <h1 class="text-center" id="statusText">Try Again</h1>
+            </div>
+            <button id="restartBtn" class="primaryBtn">Restart</button>
+        </div>
+        <!--winner window-->
+        <div class="winnerWindow">
+            <h1 class="text-center">Winner</h1>
+            <div class="winner"></div>
+            <button class="primaryBtn" id="playAgainBtn">Play Again</button>
+        </div>
+
     </div>
-        <button id="restartBtn" class="primaryBtn">Restart</button>
-    </div>
-      <!--winner window-->
-      <div class="winnerWindow">
-        <h1 class="text-center">Winner</h1>
-        <div class="winner"></div>
-        <button class="primaryBtn" id="playAgainBtn">Play Again</button>
-      </div>
+    <script src="/public/dist/gamePage.js"></script>
 
     </div>
     <script src="./dist/userCard.js"></script>
