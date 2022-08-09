@@ -40,6 +40,7 @@ exports.getUser = exports.deleteUser = exports.updateUserImage = exports.updateU
 var jsonwebtoken_1 = require("jsonwebtoken");
 var bcryptjs_1 = require("bcryptjs");
 var userModel_1 = require("../models/userModel");
+var joiPassword_1 = require("../utils/joiPassword");
 var cloudinary = require('../utils/cloudinary');
 // Generate JWT
 var generateToken = function (id) {
@@ -51,16 +52,16 @@ var generateToken = function (id) {
 // @route Post /users/register-user
 // access public
 exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, firstName, email, password, userExists, userError, salt, hashedPassword, user, error_1, registerError;
+    var _a, firstName, email, password, error, userExists, userError, salt, hashedPassword, user, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 7, , 8]);
                 _a = req.body, firstName = _a.firstName, email = _a.email, password = _a.password;
-                console.log(firstName, email, password);
-                if (!password) {
-                    res.status(400);
-                    throw new Error('Please fill all the fields');
+                error = joiPassword_1["default"].validate({ email: email, password: password }).error;
+                if (error) {
+                    console.debug(error);
+                    throw error;
                 }
                 return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
             case 1:
@@ -92,9 +93,7 @@ exports.registerUser = function (req, res) { return __awaiter(void 0, void 0, vo
             case 6: return [3 /*break*/, 8];
             case 7:
                 error_1 = _b.sent();
-                registerError = error_1;
-                res.send({ registerError: registerError });
-                console.error(error_1);
+                res.send({ error: error_1.message });
                 return [3 /*break*/, 8];
             case 8: return [2 /*return*/];
         }

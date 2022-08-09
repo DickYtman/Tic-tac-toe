@@ -41,7 +41,7 @@ var handleLoadCookie = function (ev) {
     getUserByCookie();
 };
 var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, firstName, email, password, data, userError, user, error_1;
+    var _a, firstName, email, password, data, error, user, userError, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -54,18 +54,22 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userError = data.userError, user = data.user;
-                if (userError) {
-                    document.querySelector('#errorUser').innerHTML = userError;
+                error = data.error, user = data.user, userError = data.userError;
+                console.log(error);
+                if (error) {
+                    // document.querySelector('#errorUser').innerHTML = error.message
+                    alert(error);
                 }
-                console.log(userError);
+                if (userError) {
+                    alert(userError);
+                }
                 if (user) {
                     window.location.href = "./tictactoe.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _b.sent();
-                alert("Please fill all the fields");
+                // alert(`Please fill all the fields`);  
                 console.error(error_1);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

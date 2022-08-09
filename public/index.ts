@@ -38,18 +38,22 @@ const handleRegistration = async (ev) => {
             password
         })
 
-        const { userError, user } = data
-
-        if (userError) {
-            document.querySelector('#errorUser').innerHTML = userError
+        const { error, user, userError } = data
+        console.log(error);
+        if (error) {
+            // document.querySelector('#errorUser').innerHTML = error.message
+            alert(error)
         }
-        console.log(userError);
+        
+        if(userError) {
+            alert(userError)
+        }
         if (user) {
             window.location.href = `./tictactoe.html?userId=${user._id}`
         }
 
     } catch (error) {
-        alert(`Please fill all the fields`);  
+        // alert(`Please fill all the fields`);  
         console.error(error)
     }
 }

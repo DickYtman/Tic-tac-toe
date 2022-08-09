@@ -2,7 +2,9 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import asyncHandler from 'express-async-handler'
 import UserModel from '../models/userModel'
+import signupSchema from '../utils/joiPassword'
 const cloudinary = require('../utils/cloudinary')
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -19,10 +21,16 @@ const generateToken = (id) => {
 export const registerUser = async(req, res) => {
     try {
     const { firstName, email, password } = req.body
-console.log(firstName, email, password);
-    if(!password) {
-        res.status(400)
-        throw new Error('Please fill all the fields')
+    // if(!password) {
+        //     res.status(400)
+        //     throw new Error('Please fill all the fields')
+        // }
+        
+        
+    const { error } = signupSchema.validate({ email, password })
+    if (error) {
+        console.debug(error)
+        throw error
     }
 
     const userExists = await UserModel.findOne( {email} )
@@ -52,9 +60,7 @@ console.log(firstName, email, password);
 
     }   
        } catch(error) {
-        const registerError = error
-        res.send({registerError})
-        console.error(error);
+        res.send({ error: error.message });
     }
 }
 
