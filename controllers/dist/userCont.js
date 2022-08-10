@@ -109,9 +109,11 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
             case 0:
                 _c.trys.push([0, 4, , 5]);
                 _a = req.body, email = _a.email, password = _a.password;
+                console.log(email, password);
                 return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
             case 1:
                 user = _c.sent();
+                console.log(user);
                 _b = user;
                 if (!_b) return [3 /*break*/, 3];
                 return [4 /*yield*/, bcryptjs_1["default"].compare(password, user.password)];

@@ -21,12 +21,6 @@ const generateToken = (id) => {
 export const registerUser = async(req, res) => {
     try {
     const { firstName, email, password } = req.body
-    // if(!password) {
-        //     res.status(400)
-        //     throw new Error('Please fill all the fields')
-        // }
-        
-        
     const { error } = signupSchema.validate({ email, password })
     if (error) {
         console.debug(error)
@@ -72,10 +66,10 @@ export const registerUser = async(req, res) => {
 export const loginUser = async(req, res) => {
     try {
     const { email, password } = req.body
-    
+    console.log(email, password);
     // check for user email
     const user = await UserModel.findOne( {email} )
-
+        console.log(user);
     if(user && (await bcrypt.compare(password, user.password))) {
         res.cookie('user', user._id)
         res.send({

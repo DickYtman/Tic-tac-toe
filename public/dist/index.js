@@ -77,7 +77,7 @@ var handleRegistration = function (ev) { return __awaiter(_this, void 0, void 0,
     });
 }); };
 var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, email, password, data, userExists, error_2;
+    var _a, email, password, data, user, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -89,9 +89,9 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, void 0, functi
                     })];
             case 1:
                 data = (_b.sent()).data;
-                userExists = data.userExists;
-                if (userExists) {
-                    window.location.href = "./tictactoe.html?userId=" + userExists._id;
+                user = data.user;
+                if (user) {
+                    window.location.href = "./tictactoe.html?userId=" + user._id;
                 }
                 return [3 /*break*/, 3];
             case 2:

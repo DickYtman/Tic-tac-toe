@@ -64,15 +64,15 @@ const handleLogin = async (ev) => {
             email: { value: email },
             password: { value: password }
         } = inputScraper(ev)
-
         const { data } = await axios.post('/users/user-login', {
             email,
             password
         })
-
-        const { userExists } = data
-        if (userExists) {
-            window.location.href = `./tictactoe.html?userId=${userExists._id}`
+        
+        const { user } = data
+      
+        if (user) {
+            window.location.href = `./tictactoe.html?userId=${user._id}`
         }
     } catch (error) {
  
