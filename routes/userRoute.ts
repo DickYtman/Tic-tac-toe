@@ -1,13 +1,15 @@
 import express from 'express'
 const router = express.Router();
-import { registerUser, loginUser, updateUser, deleteUser, getUser, getUserByCookie} from '../controllers/userCont'
+import { registerUser, loginUser, updateUser, updateUserImage, deleteUser, getUser, getUserByCookie} from '../controllers/userCont'
+import protect from '../middleware/authMiddleware'
 
 router
     .post('/user-register', registerUser)
     .post('/user-login', loginUser)
-    .patch('/user-card/:id', updateUser)
-    .delete('/user-card/:id', deleteUser)
-    .post('/user-card', getUser)
+    .patch('/update-user/', updateUser)
+    .patch('/update-user-image/', updateUserImage)
+    .delete('/user-card/', deleteUser)
+    .get('/get-user-card/:id', getUser)
     .get('/get-user', getUserByCookie)
 
 
