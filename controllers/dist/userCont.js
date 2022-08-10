@@ -114,6 +114,9 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
             case 1:
                 user = _c.sent();
                 console.log(user);
+                if (!user) {
+                    throw new Error('Invalid credentials');
+                }
                 _b = user;
                 if (!_b) return [3 /*break*/, 3];
                 return [4 /*yield*/, bcryptjs_1["default"].compare(password, user.password)];
@@ -127,15 +130,15 @@ exports.loginUser = function (req, res) { return __awaiter(void 0, void 0, void 
                         user: user,
                         token: generateToken(user._id)
                     });
-                }
-                else {
-                    res.status(400);
-                    throw new Error('Invalid credentials');
+                    // } else {
+                    //     res.status(400)
+                    //     throw new Error('Invalid credentials')
                 }
                 return [3 /*break*/, 5];
             case 4:
                 error_2 = _c.sent();
-                console.error(error_2);
+                console.log(error_2);
+                res.send({ error: error_2.message });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -163,7 +166,6 @@ exports.getUserByCookie = function (req, res) { return __awaiter(void 0, void 0,
             case 2:
                 error_3 = _a.sent();
                 console.log(error_3);
-                res.send({ error: error_3 });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

@@ -70,6 +70,9 @@ export const loginUser = async(req, res) => {
     // check for user email
     const user = await UserModel.findOne( {email} )
         console.log(user);
+    if(!user) {
+        throw new Error('Invalid credentials')
+    }
     if(user && (await bcrypt.compare(password, user.password))) {
         res.cookie('user', user._id)
         res.send({
@@ -77,12 +80,13 @@ export const loginUser = async(req, res) => {
             token: generateToken(user._id)
         })
 
-    } else {
-        res.status(400)
-        throw new Error('Invalid credentials')
+    // } else {
+    //     res.status(400)
+    //     throw new Error('Invalid credentials')
     }
     } catch(error) {
-        console.error(error)
+        console.log(error);
+        res.send( {error: error.message} )
     }
 }
 
@@ -102,7 +106,7 @@ export const getUserByCookie = async(req, res) => {
         res.send({ ok:true, userDB })
     } catch (error) {
         console.log(error);
-        res.send( {error} )
+        
     }
 }
 

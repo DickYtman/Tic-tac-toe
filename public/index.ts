@@ -69,8 +69,12 @@ const handleLogin = async (ev) => {
             password
         })
         
-        const { user } = data
-      
+        const { user, error } = data
+        
+        if(error) {
+            console.log(error);
+            alert(error)
+        }
         if (user) {
             window.location.href = `./tictactoe.html?userId=${user._id}`
         }
