@@ -1,3 +1,8 @@
+import { createDecipheriv } from 'crypto';
+import { create } from 'domain';
+import io from 'socket.io-client';
+const socket = io ('http://localhost5000');
+
 interface PlayerToken {
     x: string
     o: string
@@ -232,3 +237,9 @@ class TicTacToe {
 
 const ticTacToe = new TicTacToe(new DOMDisplay())
 ticTacToe.startGame()
+
+create();{
+    socket.on("hello", (msg) =>{
+        console.log("recieved", msg)
+    });
+}

@@ -1,3 +1,8 @@
+"use strict";
+exports.__esModule = true;
+var domain_1 = require("domain");
+var socket_io_client_1 = require("socket.io-client");
+var socket = socket_io_client_1["default"]('http://localhost5000');
 // creting the display of the game (game board)
 var DOMDisplay = /** @class */ (function () {
     function DOMDisplay() {
@@ -178,3 +183,9 @@ var TicTacToe = /** @class */ (function () {
 }());
 var ticTacToe = new TicTacToe(new DOMDisplay());
 ticTacToe.startGame();
+domain_1.create();
+{
+    socket.on("hello", function (msg) {
+        console.log("recieved", msg);
+    });
+}
