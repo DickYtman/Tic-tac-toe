@@ -7,26 +7,73 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.js"
     integrity="sha512-rozBdNtS7jw9BlC76YF1FQGjz17qQ0J/Vu9ZCFIW374sEy4EZRbRcUZa2RU/MZ90X2mnLU56F75VfdToGV0RiA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./dist/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body onload="handleLoadCookie(event)">
-    <form name="registerForm" id="submitRegistration">
-            <h1>Registration:</h1>
-        <div class="erroUser" id="errorUser" style="color:red;font-style: italic;"></div>
-        <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
-        <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
-        <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="false">
-        <input type="submit"  value="Register" id="registerBtn">
-    </form>
-    <form name="loginForm" id="submitLogin">
-       
+    <div class="wrapper" id="wrapper">
 
-        <h1>Login:</h1>
-        <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
-        <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
-        <input type="submit"  value="Login" id="loginBtn">
-    </form>
+        <div class="formsContainer">
 
+            <div class="signContainer">
+                <form name="loginForm" id="submitLogin" class="signinForm">        
+                    <h2 class="title">Login:</h2>
+                    <div class="inputField">
+                        <input type="email" name="email" id="emailLogin" placeholder="Enter your email" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="password" name="password" id="passwordLogin" placeholder="Enter your password" autocomplete="false">
+                    </div>
+                        <input type="submit"  value="Welcome back" id="loginBtn" class="btn">
+                </form>
+            </div>
+
+            <div class="signContainer">
+                <form name="registerForm" id="submitRegistration" class="registerForm">
+                    <h2 class="title">Registration:</h2>
+                    <div class="inputField">
+                        <input type="text" name="firstName" id="firstName" placeholder="Enter your name" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="email" name="email" id="email" placeholder="Enter your email" autocomplete="false">
+                    </div>
+                    <div class="inputField">
+                        <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="false">
+                    </div>
+                        <input type="submit"  value="Register" id="registerBtn" class="btn">
+                </form>
+            </div>
+        </div>
+
+<div class="panelContainer">
+
+<div class="panel leftPanel">
+    <div class="content">
+        <h3>New Player?</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Corrupti eius architecto, laborum dolore odio at provident.</p>
+        <button class="btn transpast" id="signUpBtn">Join us</button>
+    </div>
+    <img src="./img/game2.svg" class="image" alt="" />
+
+</div>
+
+<div class="panel rightPanel">
+    <div class="content">
+        <h3>One of us?</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+         Corrupti eius architecto, laborum dolore odio at provident sapiente .</p>
+         <button class="btn transpast" id="signInBtn">Welcome back</button>
+    </div>
+    <img src="./img/game1.svg" class="image" alt="" />
+
+</div>
+
+</div>
+
+</div>
+    <script src="./dist/signin.js"></script>
     <script src="./dist/index.js"></script>
 </body>
 </html>

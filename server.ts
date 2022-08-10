@@ -9,7 +9,9 @@ connectDB()
 const app = express()
 app.use(cookieParser())
 app.use(express.static("public"))
-app.use(express.json())
+
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb'}));
 app.use(express.urlencoded({ extended: false}))
 
 import userRoute from "./routes/userRoute"

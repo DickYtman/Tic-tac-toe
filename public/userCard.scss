@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+h1{
+    font-family: 'Poppins', sans-serif;
+
+}
+
+// * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+    
+// }
+
+.cardWrapper:before{
+    content: " ";
+    position: absolute;
+    z-index: -2;
+    width: 41vw;
+    height: 91vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 0.1rem solid #1cd81fb6;
+    background-color: #afafaf7a;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgb(0, 0, 0);
+} 
+
+.cardWrapper{
+    position: relative;
+    width: 40vw;
+    height: 80vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin: 2rem auto;
+    border: 0.1rem dashed #1cd81fb6;
+    z-index: 1;
+    .userImageWrapper{
+
+        .imageCont{
+            height: 15rem;
+            width: 15rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 0.1rem solid #46a0dc49;
+            border-radius: 250px;
+            background-color: #fff0af94;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            
+            cursor: pointer;
+            
+            img {
+                width: 15rem;
+                height: 15rem;
+                border-radius: 250px;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .uploadFolder{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                
+                cursor: pointer;
+    
+                input{
+                    width: 0px;
+                    height: 0px;
+                    opacity: 0;
+    
+                }
+            }
+    
+
+        }
+    }
+    
+    #root2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+    
+    
+        .userCardWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
+    
+            .userParamCont {
+                width: 100%;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 0.1rem solid rgb(182, 182, 182);
+    
+                input {
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 1em;
+                    color: #451018;
+                    padding: 1.2rem;
+                    outline: 0;
+                    border-width: 0 0 2px;
+                    border-color: rgba(197, 66, 66, 0);
+                    background-color: transparent;
+                }
+
+                p{
+                    font-family: 'Poppins', sans-serif;
+                }
+                
+                #editIcon{
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    cursor: pointer;   
+                    background-color: Transparent;
+                    background-repeat:no-repeat;
+                    border: none;           
+                }
+    
+                #buttonEdit{
+                    width: 40px;
+                    height: 50px; 
+                    background-color: transparent;
+                    background-repeat: no-repeat;
+                    border: none;
+                    cursor: pointer;
+                    overflow: hidden;
+                    outline: none;
+                }
+    
+    
+                #editIconSave{
+                    cursor: pointer;
+                                 
+                }
+    
+            }
+            
+        }
+    
+    }
+}

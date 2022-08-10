@@ -38,18 +38,23 @@ const handleRegistration = async (ev) => {
             password
         })
 
-        const { userError, user } = data
-
-        if (userError) {
-            document.querySelector('#errorUser').innerHTML = userError
+        const { error, user, userError } = data
+        console.log(error);
+        if (error) {
+            // document.querySelector('#errorUser').innerHTML = error.message
+            alert(error)
         }
-        console.log(userError);
+        
+        if(userError) {
+            alert(userError)
+        }
         if (user) {
-            window.location.href = `./game.html?userId=${user._id}`
+            window.location.href = `./tictactoe.html?userId=${user._id}`
         }
 
     } catch (error) {
-        console.log(error)
+        // alert(`Please fill all the fields`);  
+        console.error(error)
     }
 }
 
@@ -67,9 +72,10 @@ const handleLogin = async (ev) => {
 
         const { userExists } = data
         if (userExists) {
-            window.location.href = `./game.html?userId=${userExists._id}`
+            window.location.href = `./tictactoe.html?userId=${userExists._id}`
         }
     } catch (error) {
+ 
         console.log(error);
     }
 }
@@ -77,13 +83,11 @@ const handleLogin = async (ev) => {
 
 const getUserByCookie = async () => {
     try {
-
-
         const { data } = await axios.get('/users/get-user')
 
         const { userDB } = data
         if (userDB) {
-            window.location.href = `./game.html?userId=${userDB._id}`
+            window.location.href = `./tictactoe.html?userId=${userDB._id}`
         }
     } catch (error) {
         console.log(error);

@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+h1 {
+  font-family: "Poppins", sans-serif;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -84,14 +89,16 @@
 
 .startingGame, .winnerWindow, .draw {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 600px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgba(49, 49, 49, 0.61);
 }
 
 .draw, .winnerWindow {
@@ -100,4 +107,11 @@
 
 .draw.show, .winnerWindow.show {
   display: flex;
+}
+
+#userCardId h1 {
+  color: #ff615f;
+}
+#userCardId h1:hover {
+  color: #bbbbbb;
 }
