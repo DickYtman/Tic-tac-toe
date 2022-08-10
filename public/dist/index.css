@@ -37,10 +37,22 @@ body, input {
   left: 0;
 }
 
-.signContainer {
+.signinContainer {
   position: absolute;
   top: 55%;
   left: 75%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  transition: 1s 0.7s ease-in-out;
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 5;
+}
+
+.signupContainer {
+  position: absolute;
+  bottom: 15%;
+  right: 25%;
   transform: translate(-50%, -50%);
   width: 50%;
   transition: 1s 0.7s ease-in-out;
